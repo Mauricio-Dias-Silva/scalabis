@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EscalaBis - Soluções Empresariais de Alta Performance</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <style>
+        /* --- PALETA DE CORES E CONFIGURAÇÕES GLOBAIS --- */
+        :root {
+            /* TEMA CLARO (DEFAULT) */
+            --cor-fundo: #f8f9fa;
+            --cor-fundo-secundario: #ffffff;
+            --cor-destaque: #0c5ab3; /* Azul para o tema claro */
+            --cor-texto: #040d1c;
+            --cor-texto-secundario: #555;
+            --cor-borda: #dee2e6;
+            --sombra-padrao: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] {
+            /* TEMA ESCURO */
+            --cor-fundo: #040d1c;
+            --cor-fundo-secundario: #0a192f;
+            --cor-destaque: #42f2a7; /* Verde para o tema escuro */
+            --cor-texto: #e2e8f0;
+            --cor-texto-secundario: #a0aec0;
+            --cor-borda: #1e293b;
+            --sombra-padrao: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: none; /* Esconde o cursor padrão */
+        }
+        .container { max-width: 1200px; margin: auto; padding: 0 25px; }
+        h1, h2, h3 { font-weight: 700; color: var(--cor-texto); transition: color 0.3s ease; }
+        h2 { font-size: 2.8rem; text-align: center; margin-bottom: 60px; }
+        h2 span { color: var(--cor-destaque); }
+        section { padding: 100px 0; position: relative; }
+        a, button, input[type='checkbox'] { cursor: none; }
+
+        /* --- CURSOR PERSONALIZADO --- */
+        .cursor-dot, .cursor-outline {
+            pointer-events: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, transform 0.1s ease-out;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--cor-destaque);
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--cor-destaque);
+        }
+        body:hover .cursor-dot, body:hover .cursor-outline { opacity: 1; }
+        .cursor-outline.hover { transform: translate(-50%, -50%) scale(1.5); background-color: rgba(var(--cor-destaque-rgb), 0.2); }
+        [data-theme="dark"] .cursor-outline.hover { background-color: rgba(66, 242, 167, 0.2); }
+        [data-theme="light"] .cursor-outline.hover { background-color: rgba(12, 90, 179, 0.2); }
+
+        /* --- NAVBAR COM SELETOR DE TEMA --- */
+        header {
+            background: rgba(var(--cor-fundo-secundario-rgb, 255, 255, 255), 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--cor-borda);
+            position: sticky; top: 0; z-index: 1000;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        [data-theme="dark"] header { background: rgba(10, 25, 47, 0.8); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo-img { height: 40px; transition: filter 0.3s ease; } /* Altura do logo */
+        [data-theme="light"] .logo-img.dark-mode-only { display: none; } /* Esconde logo escuro no tema claro */
+        [data-theme="dark"] .logo-img.light-mode-only { display: none; } /* Esconde logo claro no tema escuro */
+        .nav-menu { display: flex; align-items: center; gap: 25px; }
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 35px; }
+        .nav-links a { color: var(--cor-texto); text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--cor-destaque); }
+        .theme-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .theme-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--cor-destaque); }
+        input:checked + .slider:before { transform: translateX(24px); }
+        
+        /* --- SEÇÃO HERO --- */
+        .hero { position: relative; height: 95vh; display: flex; align-items: center; text-align: left; padding: 0; color: #fff; }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(4, 13, 28, 0.7), rgba(4, 13, 28, 0.7)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            z-index: -1;
+        }
+        .hero-content { max-width: 650px; }
+        .hero h1 { color: #fff; font-size: 4rem; font-weight: 800; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; color: #e2e8f0; margin: 1.5rem 0 2.5rem 0; }
+        .cta-button {
+            display: inline-block;
+            background: var(--cor-destaque);
+            color: var(--cor-fundo-escuro);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(66, 242, 167, 0.2); }
+        [data-theme="light"] .cta-button { color: #fff; }
+
+        /* --- SEÇÃO SOBRE PROFISSIONAL --- */
+        #sobre-profissional {
+            background-color: var(--cor-fundo);
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+        .profissional-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: auto;
+        }
+        .profissional-content img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 30px;
+            border: 5px solid var(--cor-destaque);
+            box-shadow: var(--sombra-padrao);
+        }
+        .profissional-content h2 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        .profissional-content p {
+            font-size: 1.1rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 20px;
+        }
+
+        /* --- SEÇÃO SOLUÇÕES --- */
+        #solucoes { background-color: var(--cor-fundo-secundario); transition: background-color 0.3s ease; }
+        .solucoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .solucao-item {
+            background: var(--cor-fundo);
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid var(--cor-borda);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: var(--sombra-padrao);
+        }
+        .solucao-item:hover { transform: translateY(-10px); border-color: var(--cor-destaque); }
+        .solucao-item i { font-size: 2.5rem; color: var(--cor-destaque); margin-bottom: 20px; }
+        .solucao-item h3 { margin-top: 0; font-size: 1.4rem; }
+        .solucao-item p { color: var(--cor-texto-secundario); }
+
+        /* --- SEÇÃO RESULTADOS REAIS --- */
+        .case-card {
+            background: var(--cor-fundo-secundario);
+            border: 1px solid var(--cor-borda);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: var(--sombra-padrao);
+        }
+        .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .case-card:hover { transform: translateY(-10px); border-color: var(--cor-destaque); }
+        .case-content { padding: 30px; }
+        .case-metric { font-size: 2.5rem; font-weight: 800; color: var(--cor-destaque); }
+        .case-card h3 { margin-top: 10px; }
+        .case-card blockquote { margin: 20px 0 0 0; padding-left: 15px; border-left: 3px solid var(--cor-destaque); font-style: italic; color: var(--cor-texto-secundario); }
+
+        /* --- SEÇÃO INSTAGRAM --- */
+        #instagram-feed { background-color: var(--cor-fundo-secundario); }
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .instagram-post {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        .instagram-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .instagram-post:hover img { transform: scale(1.1); }
+        .instagram-link { text-align: center; margin-top: 50px; }
+
+        /* --- SEÇÃO CTA FINAL --- */
+        #cta-diagnostico { background: linear-gradient(45deg, var(--cor-destaque), #34d399); color: var(--cor-fundo-escuro); text-align: center; }
+        [data-theme="light"] #cta-diagnostico { background: linear-gradient(45deg, #0c5ab3, #0a3d62); color: #fff; }
+        #cta-diagnostico h2 { color: inherit; }
+        #cta-diagnostico p { max-width: 600px; margin: 20px auto 30px auto; font-size: 1.1rem; }
+        .cta-button.dark { background: var(--cor-fundo); color: var(--cor-texto); }
+        .cta-button.dark:hover { box-shadow: 0 5px 20px rgba(4, 13, 28, 0.4); }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--cor-fundo-secundario);
+            padding: 80px 0 30px 0;
+            border-top: 1px solid var(--cor-borda);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+        .footer-col h4 {
+            color: var(--cor-destaque);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .footer-col p, .footer-col ul, .footer-col a {
+            color: var(--cor-texto-secundario);
+            text-decoration: none;
+            list-style: none;
+            padding: 0; margin: 0;
+            line-height: 2;
+        }
+        .footer-col a:hover { color: var(--cor-destaque); }
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px; width: 40px;
+            background: var(--cor-fundo);
+            color: var(--cor-destaque);
+            margin-right: 10px;
+            border-radius: 50%;
+            border: 1px solid var(--cor-borda);
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background-color: var(--cor-destaque);
+            color: var(--cor-fundo-secundario);
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            color: var(--cor-texto-secundario);
+            font-size: 0.9rem;
+        }
+
+        /* --- BOTÃO VOLTAR AO TOPO --- */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            border: none;
+            outline: none;
+            background-color: var(--cor-destaque);
+            color: var(--cor-fundo);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 18px;
+            box-shadow: var(--sombra-padrao);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #scrollTopBtn:hover { transform: scale(1.1); }
+
+        /* --- RESPONSIVIDADE --- */
+        .hamburger { display: none; cursor: pointer; }
+        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--cor-texto); }
+        @media (max-width: 900px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%; top: 75px;
+                gap: 0;
+                flex-direction: column;
+                background: var(--cor-fundo-secundario);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 20px 0;
+                border-bottom: 1px solid var(--cor-borda);
+            }
+            .nav-menu.active { left: 0; }
+            .nav-links { flex-direction: column; gap: 0; width: 100%; }
+            .nav-links li { padding: 15px 0; width: 100%; }
+            .hamburger { display: block; z-index: 1001; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .profissional-content img { width: 120px; height: 120px; }
+            .profissional-content h2 { font-size: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#inicio" class="logo">
+                    Escala<span>Bis</span> 
+                </a>
+                <div class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="#sobre-profissional">Sobre</a></li>
+                        <li><a href="#solucoes">Soluções</a></li>
+                        <li><a href="#cases">Resultados</a></li>
+                        <li><a href="#instagram-feed">Conteúdo</a></li>
+                    </ul>
+                    <label class="theme-switch">
+                        <input type="checkbox" id="theme-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Sua empresa pode <span>escalar</span>. Nós mostramos o caminho.</h1>
+                    <p>Oferecemos soluções empresariais especializadas para otimizar operações, aumentar a eficiência e garantir o crescimento sustentável do seu negócio.</p>
+                    <a href="#cta-diagnostico" class="cta-button">Agende um Diagnóstico Gratuito</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre-profissional">
+            <div class="container">
+                <div class="profissional-content">
+                    <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop" alt="Foto do Profissional">
+                    <h2>Olá, eu sou <span>[Seu Nome Aqui]</span></h2>
+                    <p>Com X anos de experiência em [sua área principal], minha missão é transformar desafios empresariais em oportunidades de crescimento. Sou apaixonado(a) por [algo que você ama fazer relacionado ao trabalho] e acredito que [sua filosofia ou valor principal].</p>
+                    <p>Na EscalaBis, lidero o desenvolvimento de estratégias inovadoras para [benefício principal].</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solucoes">
+            <div class="container">
+                <h2>Soluções <span>Completas</span> para seu Negócio</h2>
+                <div class="solucoes-grid">
+                    <div class="solucao-item"> <i class="fas fa-briefcase"></i> <h3>Consultoria Empresarial</h3> <p>Análise detalhada e estratégias práticas para otimizar processos e aumentar a eficiência.</p></div>
+                    <div class="solucao-item"> <i class="fas fa-piggy-bank"></i> <h3>BPO Financeiro</h3> <p>Externalize sua operação financeira com eficiência, redução de custos e mais tempo para crescer.</p></div>
+                    <div class="solucao-item"> <i class="fas fa-cogs"></i> <h3>Gestão Administrativa</h3> <p>Soluções para otimizar o funcionamento diário da sua empresa, garantindo organização e produtividade.</p></div>
+                    <div class="solucao-item"> <i class="fas fa-chart-line"></i> <h3>Estruturação Comercial</h3> <p>Estratégias para ampliar sua carteira de clientes e aumentar as receitas de forma concreta.</p></div>
+                    <div class="solucao-item"> <i class="fas fa-bullhorn"></i> <h3>Marketing Estratégico</h3> <p>Ações criativas e eficazes para impulsionar sua marca e se destacar no mercado.</p></div>
+                    <div class="solucao-item"> <i class="fas fa-users"></i> <h3>Recursos Humanos</h3> <p>Recrutamento e seleção eficientes para formar as equipes de alto desempenho que sua empresa precisa.</p></div>
+                    <div class="solucao-item"> <i class="fas fa-user-tie"></i> <h3>Consultoria Financeira Pessoal</h3> <p>Planejamento e orientação para você otimizar seus recursos e atingir a independência financeira.</p></div>
+                    <div class="solucao-item"> <i class="fas fa-star"></i> <h3>Serviços Sob Demanda</h3> <p>Flexibilidade e agilidade em soluções operacionais e estratégicas adaptadas ao seu contexto.</p></div>
+                    <div class="solucao-item"> <i class="fas fa-book-open"></i> <h3>E-books e Ferramentas</h3> <p>Conteúdo exclusivo e ferramentas práticas para aprofundar conhecimentos e otimizar processos.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cases">
+            <div class="container">
+                <h2>Resultados <span>Reais</span></h2>
+                <div class="cases-grid">
+                    <div class="case-card">
+                        <div class="case-content">
+                            <div class="case-metric">+40%</div>
+                            <h3>Eficiência Operacional</h3>
+                            <p><strong>Desafio:</strong> Processos manuais e desalinhados que geravam retrabalho e custos elevados.</p>
+                            <blockquote>"A EscalaBis transformou nossa operação. Hoje somos mais rápidos, mais baratos e mais inteligentes."</blockquote>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-content">
+                            <div class="case-metric">+25%</div>
+                            <h3>Aumento nas Vendas</h3>
+                            <p><strong>Desafio:</strong> Time comercial desestruturado e sem um funil de vendas claro para seguir.</p>
+                            <blockquote>"Com a nova estruturação comercial, nosso time finalmente atingiu e superou as metas de vendas."</blockquote>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-content">
+                            <div class="case-metric">-30%</div>
+                            <h3>Redução de Custos</h3>
+                            <p><strong>Desafio:</strong> Falta de visibilidade financeira e gastos desnecessários que comprometiam a margem.</p>
+                            <blockquote>"O BPO Financeiro nos deu clareza total. Tomamos decisões melhores e cortamos custos que nem sabíamos que tínhamos."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="instagram-feed">
+            <div class="container">
+                <h2>Conteúdo Recente do <span>Instagram</span></h2>
+                <div class="instagram-grid">
+                    <div class="instagram-post"><img src="https://via.placeholder.com/300x300/0a192f/42f2a7?text=Post+1" alt="Post do Instagram 1"></div>
+                    <div class="instagram-post"><img src="https://via.placeholder.com/300x300/0a192f/42f2a7?text=Post+2" alt="Post do Instagram 2"></div>
+                    <div class="instagram-post"><img src="https://via.placeholder.com/300x300/0a192f/42f2a7?text=Post+3" alt="Post do Instagram 3"></div>
+                    <div class="instagram-post"><img src="https://via.placeholder.com/300x300/0a192f/42f2a7?text=Post+4" alt="Post do Instagram 4"></div>
+                </div>
+                <div class="instagram-link">
+                    <a href="https://www.instagram.com/escalabis.solutions/" target="_blank" class="cta-button">Siga @escalabis.solutions</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta-diagnostico">
+            <div class="container">
+                <h2>Descubra o Potencial Oculto da Sua Empresa</h2>
+                <p>Em uma sessão estratégica gratuita de 45 minutos, vamos analisar um ponto crítico do seu negócio e te entregar um plano de ação com 3 passos que você pode implementar imediatamente.</p>
+                <a href="#" class="cta-button dark">Quero Meu Diagnóstico Gratuito</a>
+            </div>
+        </section>
+        
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#inicio" class="logo">
+                        Escala<span>Bis</span>
+                    </a>
+                    <p style="margin-top: 20px;">Soluções empresariais que unem estratégia e tecnologia para destravar o seu crescimento.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegue</h4>
+                    <ul>
+                        <li><a href="#sobre-profissional">Sobre</a></li>
+                        <li><a href="#solucoes">Soluções</a></li>
+                        <li><a href="#cases">Resultados</a></li>
+                        <li><a href="#instagram-feed">Conteúdo</a></li>
+                        <li><a href="#cta-diagnostico">Diagnóstico Gratuito</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <p><i class="fas fa-envelope" style="margin-right: 8px; color: var(--cor-destaque);"></i> <a href="mailto:contato@escalabis.com.br">contato@escalabis.com.br</a></p>
+                    <p><i class="fas fa-phone" style="margin-right: 8px; color: var(--cor-destaque);"></i> <a href="tel:+5511988391763">(11) 98839-1763</a></p>
+                </div>
+                <div class="footer-col">
+                    <h4>Siga-nos</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/escalabis.solutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EscalaBis. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="scrollTopBtn" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // --- SCRIPT DO MENU HAMBURGER ---
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // --- SCRIPT DO SELETOR DE TEMA ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Adiciona um listener para a mudança de tema
+        themeToggle.addEventListener('change', function() {
+            const selectedTheme = this.checked ? 'dark' : 'light';
+            body.setAttribute('data-theme', selectedTheme);
+            localStorage.setItem('theme', selectedTheme); // Salva a preferência
+            updateLogoVisibility(selectedTheme);
+        });
+
+        // Função para atualizar a visibilidade do logo
+        function updateLogoVisibility(theme) {
+            const darkLogos = document.querySelectorAll('.dark-mode-only');
+            const lightLogos = document.querySelectorAll('.light-mode-only');
+
+            darkLogos.forEach(logo => logo.style.display = theme === 'dark' ? 'inline-block' : 'none');
+            lightLogos.forEach(logo => logo.style.display = theme === 'light' ? 'inline-block' : 'none');
+            
+            // Se nenhum logo específico for encontrado, mostra o texto do logo
+            const textLogos = document.querySelectorAll('.logo');
+            textLogos.forEach(logo => {
+                const hasImage = logo.querySelector('.logo-img');
+                if (!hasImage) {
+                    logo.style.display = 'inline-block'; // Garante que o texto logo esteja visível se não houver imagem
+                } else if (hasImage && !hasImage.style.display && (!logo.querySelector('.dark-mode-only') || !logo.querySelector('.light-mode-only'))) {
+                    // Se houver imagens mas elas não estiverem ativas (por exemplo, apenas 1 modo de logo), o texto se esconde
+                    logo.childNodes[0].nodeValue = ''; // Limpa o texto "EscalaBis"
+                }
+            });
+        }
+
+        // Aplica o tema salvo ou padrão ao carregar a página
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            applyTheme(currentTheme);
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        // Função auxiliar para aplicar tema e atualizar logo
+        function applyTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            themeToggle.checked = theme === 'dark';
+            updateLogoVisibility(theme);
+        }
+
+        // --- SCRIPT DO CURSOR PERSONALIZADO ---
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+        window.addEventListener("mousemove", function (e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        });
+        const interactiveElements = document.querySelectorAll("a, button, input[type='checkbox'], .slider, .solucao-item, .case-card, .instagram-post");
+        interactiveElements.forEach((el) => {
+            el.addEventListener("mouseover", () => cursorOutline.classList.add("hover"));
+            el.addEventListener("mouseleave", () => cursorOutline.classList.remove("hover"));
+        });
+
+        // --- SCRIPT DO BOTÃO VOLTAR AO TOPO ---
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
+            document.body.scrollTop = 0; // Para Safari
+        }
+    </script>
+</body>
+</html>

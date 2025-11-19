@@ -1,0 +1,23 @@
+# Cloud Build para Site Estático (EscalaBis) - Rápido e Simples
+timeout: "600s" # 10 minutos (mais do que suficiente)
+
+steps:
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        set -e
+        # Implantar o contêiner (que usa o Nginx) no Cloud Run
+        gcloud run deploy "$_SERVICE_NAME" \
+          --source . \
+          --region "$_REGION" \
+          --platform managed \
+          --allow-unauthenticated \
+          --project "$_PROJECT_ID"
+        
+# Variáveis de substituição
+substitutions:
+  _SERVICE_NAME: "escalabis-site" 
+  _REGION: "us-east1"
+  _PROJECT_ID: "pythonjet" # Substitua pelo ID do projeto do cliente, se necessário
