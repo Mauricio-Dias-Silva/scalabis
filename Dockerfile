@@ -1,5 +1,22 @@
-FROM nginx:alpine
-COPY . /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV PORT 8080
+
+# Set work directory
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt /app/
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Copy project including db.sqlite3
+COPY . /app/
+
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
+# Run Gunicorn
+CMD exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
