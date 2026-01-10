@@ -18,5 +18,5 @@ COPY . /app/
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
-# Run Gunicorn
-CMD exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+# Run Migrations and Start Gunicorn
+CMD sh -c "python manage.py migrate && exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
