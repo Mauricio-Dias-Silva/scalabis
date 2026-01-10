@@ -81,7 +81,11 @@ class SiteSettings(models.Model):
     contact_address = models.CharField("Endereço", max_length=200, default="Carapicuíba - SP")
 
     # Bonus Material
-    bonus_spreadsheet = models.FileField("Planilha Bônus (CSV/Excel)", upload_to="docs/", blank=True, null=True, help_text="Faça upload da planilha que será baixada na home.")
+    bonus_title = models.CharField("Título do Bônus", max_length=200, default='O "Pulo do Gato" que Faltava na Sua Gestão')
+    bonus_subtitle = models.TextField("Descrição do Bônus", default='Eu preparei algo que você não encontra em lugar nenhum. Não é apenas uma planilha, é o Mapa do Tesouro da sua liberdade financeira.')
+    bonus_button_text = models.CharField("Texto do Botão", max_length=100, default='BAIXAR "O MAPA DO TESOURO"')
+    bonus_spreadsheet = models.FileField("Planilha Bônus (CSV/Excel)", upload_to="docs/", blank=True, null=True, help_text="Faça upload da planilha que será baixada. Se vazio, usa a padrão.")
+    bonus_image = models.ImageField("Imagem/Ícone Personalizado", upload_to="site/", blank=True, null=True, help_text="Opcional. Substitui o ícone de presente.")
 
     class Meta:
         verbose_name = "Configurações do Site"

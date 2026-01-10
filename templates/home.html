@@ -155,26 +155,26 @@
                     style="position: absolute; top: 30px; right: -50px; background: #c5a059; color: white; padding: 10px 100px; transform: rotate(45deg); font-weight: bold; font-size: 0.9rem; letter-spacing: 2px; box-shadow: 0 5px 10px rgba(0,0,0,0.2);">
                     BRINDE</div>
 
+                {% if site_settings.bonus_image %}
+                <img src="{{ site_settings.bonus_image.url }}" alt="Bônus" class="scale-loop"
+                    style="max-height: 120px; margin-bottom: 20px;">
+                {% else %}
                 <i class="fas fa-gift scale-loop"
                     style="font-size: 4rem; color: #c5a059; margin-bottom: 30px; display: inline-block;"></i>
+                {% endif %}
 
                 <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #1a1a1a; font-weight: 800; line-height: 1.2;">
-                    O "Pulo do Gato" que Faltava na Sua <span
-                        style="color: #c5a059; font-style: italic; font-family: 'Playfair Display', serif;">Gestão</span>
+                    {{ site_settings.bonus_title|safe }}
                 </h2>
 
-                <p style="font-size: 1.2rem; color: #555; max-width: 700px; margin: 0 auto 40px; line-height: 1.8;">
-                    Eu preparei algo que você não encontra em lugar nenhum. Não é apenas uma planilha, é o <strong>Mapa
-                        do Tesouro</strong> da sua liberdade financeira.
-                    Simples, direta e extremamente poderosa. <br><br>
-                    <strong style="color: #1a1a1a;">É o meu presente exclusivo para você começar com o pé
-                        direito.</strong>
-                </p>
+                <div style="font-size: 1.2rem; color: #555; max-width: 700px; margin: 0 auto 40px; line-height: 1.8;">
+                    {{ site_settings.bonus_subtitle|linebreaks }}
+                </div>
 
                 <a href="{% if site_settings.bonus_spreadsheet %}{{ site_settings.bonus_spreadsheet.url }}{% else %}{% static 'docs/planilha_financeira_exclusiva.csv' %}{% endif %}"
                     download class="btn-checkout-lg"
                     style="display: inline-block; width: auto; padding: 20px 60px; font-size: 1.1rem; box-shadow: 0 10px 30px rgba(197, 160, 89, 0.4);">
-                    <i class="fas fa-download" style="margin-right: 15px;"></i> BAIXAR "O MAPA DO TESOURO"
+                    <i class="fas fa-download" style="margin-right: 15px;"></i> {{ site_settings.bonus_button_text }}
                 </a>
 
                 <p

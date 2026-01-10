@@ -13,6 +13,9 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ('Contato', {
             'fields': ('contact_phone', 'contact_email', 'contact_address')
         }),
+        ('Área de Bônus (Download)', {
+            'fields': ('bonus_title', 'bonus_subtitle', 'bonus_button_text', 'bonus_spreadsheet', 'bonus_image')
+        }),
     )
     def has_add_permission(self, request):
         # Allow addition only if no settings exist
