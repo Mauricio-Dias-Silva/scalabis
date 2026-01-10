@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Finanças Descomplicadas - Saia do vermelho e comece a lucrar em 30 dias.">
+    <title>Finanças Descomplicadas | Dilvania Teixeira</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <style>
+        /* DESIGN SYSTEM */
+        :root {
+            --cor-fundo: #fdfbf7;
+            --cor-fundo-secundario: #ffffff;
+            --cor-destaque: #c5a059;
+            --cor-texto: #1a1a1a;
+            --cor-texto-secundario: #555;
+            --cor-borda: #e0e0e0;
+            --sombra-padrao: 0 10px 30px rgba(197, 160, 89, 0.15);
+            --fonte-titulo: 'Playfair Display', serif;
+            --fonte-corpo: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: var(--fonte-corpo);
+            margin: 0;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 0 25px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--cor-borda);
+            text-align: center;
+            background: #fff;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            font-family: var(--fonte-titulo);
+        }
+
+        .logo span {
+            color: var(--cor-destaque);
+        }
+
+        .hero-produto {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-produto h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-produto span {
+            color: var(--cor-destaque);
+            font-style: italic;
+        }
+
+        .hero-produto p {
+            font-size: 1.2rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .book-mockup {
+            width: 200px;
+            height: 300px;
+            background: linear-gradient(135deg, #16a085, #f4d03f);
+            /* Verde/Dourado para Dinheiro */
+            margin: 0 auto 40px;
+            border-radius: 5px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-direction: column;
+            border-left: 10px solid #c5a059;
+        }
+
+        .btn-checkout {
+            background: #27ae60;
+            color: #fff;
+            padding: 20px 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.4);
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-checkout:hover {
+            transform: scale(1.05);
+            background: #219150;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(39, 174, 96, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+            }
+        }
+
+        .benefits {
+            background: #fff;
+            padding: 80px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .benefit-item i {
+            font-size: 2rem;
+            color: var(--cor-destaque);
+            margin-bottom: 20px;
+        }
+
+        .guarantee {
+            background: #fdfbf7;
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--cor-borda);
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Dilvania<span>Teixeira</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-produto">
+            <div class="container">
+                <div class="book-mockup"
+                    style="background: none; box-shadow: none; border: none; width: 300px; height: auto;">
+                    <img src="ebook-financas-cover.png" alt="Capa do Livro"
+                        style="width: 100%; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+                </div>
+                <h1>10 Passos para uma <br><span>Vida Financeira Consciente</span></h1>
+                <p>Organize sua vida financeira com clareza, responsabilidade e menos pressão. Um guia prático para
+                    transformar sua relação com o dinheiro.</p>
+
+                <a href="https://pay.kiwify.com.br/ipY4f19" class="btn-checkout">
+                    QUERO ORGANIZAR MINHAS FINANÇAS <br>
+                    <span style="font-size: 0.9rem; font-weight: 400;">Apenas R$ 49,90</span>
+                </a>
+
+                <p style="margin-top: 20px; font-size: 0.9rem;"><i class="fas fa-lock"></i> Pagamento 100% Seguro via
+                    KiwiFi</p>
+            </div>
+        </section>
+
+        <section class="benefits">
+            <div class="container">
+                <h2 style="text-align: center;">O Caminho da <span>Prosperidade</span></h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <h3>Fluxo de Caixa</h3>
+                        <p>Ferramenta simples para registrar entradas e saídas e saber exatamente para onde vai cada
+                            centavo.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-search-dollar"></i>
+                        <h3>Corte de Custos</h3>
+                        <p>Identifique gastos invisíveis que estão drenando o lucro da sua empresa ou seu salário.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-seedling"></i>
+                        <h3>Primeiros Investimentos</h3>
+                        <p>Como montar sua reserva de emergência e começar a investir com segurança.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guarantee">
+            <div class="container">
+                <i class="fas fa-shield-alt"
+                    style="font-size: 4rem; color: var(--cor-destaque); margin-bottom: 20px;"></i>
+                <h2>Garantia Total</h2>
+                <p>Se em 7 dias você não sentir que o material vale a pena, devolvemos seu dinheiro.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Dilvania Teixeira. Todos os direitos reservados.</p>
+            <p>Dúvidas? <a href="https://wa.me/5511982675531" style="color: var(--cor-destaque);">Fale no WhatsApp</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

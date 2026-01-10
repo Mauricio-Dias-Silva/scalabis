@@ -1,592 +1,818 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EscalaBis - Soluções Empresariais de Alta Performance</title>
+    <meta name="description"
+        content="Dilvania Teixeira - Consultoria Empresarial e Estratégica. Escale seu negócio com gestão eficiente, inteligência financeira e liderança de alta performance.">
+    <meta name="keywords"
+        content="Dilvania Teixeira, Consultoria Empresarial, Gestão de Negócios, Ebooks de Gestão, Mentoria Empresarial, Estratégia de Negócios">
+    <title>Dilvania Teixeira | Consultoria Estratégica de Alta Performance</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dilvania Teixeira",
+      "url": "https://www.dilvaniateixeira.com.br",
+      "sameAs": [
+        "https://www.instagram.com/dilvania.teixeira",
+        "https://br.linkedin.com/in/dilvaniateixeira"
+      ],
+      "jobTitle": "Consultora Empresarial",
+    "description": "Especialista em alavancagem de negócios e gestão estratégica."
+    }
+    </script>
+
+    <!-- OPEN GRAPH / WHATSAPP / FACEBOOK / LINKEDIN -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.dilvaniateixeira.com.br/">
+    <meta property="og:title" content="Dilvania Teixeira | Consultoria Estratégica">
+    <meta property="og:description"
+        content="Transforme seu negócio com gestão eficiente e liderança de alta performance. Conheça meus livros e mentorias.">
+    <meta property="og:image" content="https://www.dilvaniateixeira.com.br/dilvania-profile-final.png">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- TWITTER -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.dilvaniateixeira.com.br/">
+    <meta property="twitter:title" content="Dilvania Teixeira | Consultoria Estratégica">
+    <meta property="twitter:description"
+        content="Transforme seu negócio com gestão eficiente e liderança de alta performance.">
+    <meta property="twitter:image" content="https://www.dilvaniateixeira.com.br/dilvania-profile-final.png">
 
     <style>
         /* --- PALETA DE CORES E CONFIGURAÇÕES GLOBAIS --- */
         :root {
-            /* TEMA CLARO (DEFAULT) */
-            --cor-fundo: #f8f9fa;
+            /* TEMA CLARO (PREMIUM) */
+            --cor-fundo: #fdfbf7;
+            /* Creme bem suave */
             --cor-fundo-secundario: #ffffff;
-            --cor-destaque: #0c5ab3; /* Azul para o tema claro */
-            --cor-texto: #040d1c;
+            --cor-destaque: #c5a059;
+            /* Dourado luxo */
+            --cor-destaque-hover: #b08d48;
+            --cor-texto: #1a1a1a;
             --cor-texto-secundario: #555;
-            --cor-borda: #dee2e6;
-            --sombra-padrao: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --cor-borda: #e0e0e0;
+            --sombra-padrao: 0 10px 30px rgba(197, 160, 89, 0.15);
+            --fonte-titulo: 'Playfair Display', serif;
+            --fonte-corpo: 'Poppins', sans-serif;
         }
 
         [data-theme="dark"] {
-            /* TEMA ESCURO */
-            --cor-fundo: #040d1c;
-            --cor-fundo-secundario: #0a192f;
-            --cor-destaque: #42f2a7; /* Verde para o tema escuro */
-            --cor-texto: #e2e8f0;
-            --cor-texto-secundario: #a0aec0;
-            --cor-borda: #1e293b;
-            --sombra-padrao: 0 10px 30px rgba(0, 0, 0, 0.3);
+            /* TEMA ESCURO (PREMIUM DARK) */
+            --cor-fundo: #0a0a0a;
+            --cor-fundo-secundario: #141414;
+            --cor-destaque: #d4af37;
+            /* Dourado metálico */
+            --cor-destaque-hover: #f1c40f;
+            --cor-texto: #f0f0f0;
+            --cor-texto-secundario: #b0b0b0;
+            --cor-borda: #2a2a2a;
+            --sombra-padrao: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--fonte-corpo);
             margin: 0;
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
             line-height: 1.7;
             overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: none; /* Esconde o cursor padrão */
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
-        .container { max-width: 1200px; margin: auto; padding: 0 25px; }
-        h1, h2, h3 { font-weight: 700; color: var(--cor-texto); transition: color 0.3s ease; }
-        h2 { font-size: 2.8rem; text-align: center; margin-bottom: 60px; }
-        h2 span { color: var(--cor-destaque); }
-        section { padding: 100px 0; position: relative; }
-        a, button, input[type='checkbox'] { cursor: none; }
 
-        /* --- CURSOR PERSONALIZADO --- */
-        .cursor-dot, .cursor-outline {
-            pointer-events: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
+        /* --- ANIMAÇÕES (WOW FACTOR) --- */
+        .reveal {
             opacity: 0;
-            transition: opacity 0.3s ease-in-out, transform 0.1s ease-out;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
         }
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--cor-destaque);
-        }
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--cor-destaque);
-        }
-        body:hover .cursor-dot, body:hover .cursor-outline { opacity: 1; }
-        .cursor-outline.hover { transform: translate(-50%, -50%) scale(1.5); background-color: rgba(var(--cor-destaque-rgb), 0.2); }
-        [data-theme="dark"] .cursor-outline.hover { background-color: rgba(66, 242, 167, 0.2); }
-        [data-theme="light"] .cursor-outline.hover { background-color: rgba(12, 90, 179, 0.2); }
 
-        /* --- NAVBAR COM SELETOR DE TEMA --- */
-        header {
-            background: rgba(var(--cor-fundo-secundario-rgb, 255, 255, 255), 0.8);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--cor-borda);
-            position: sticky; top: 0; z-index: 1000;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
-        [data-theme="dark"] header { background: rgba(10, 25, 47, 0.8); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; }
-        .logo-img { height: 40px; transition: filter 0.3s ease; } /* Altura do logo */
-        [data-theme="light"] .logo-img.dark-mode-only { display: none; } /* Esconde logo escuro no tema claro */
-        [data-theme="dark"] .logo-img.light-mode-only { display: none; } /* Esconde logo claro no tema escuro */
-        .nav-menu { display: flex; align-items: center; gap: 25px; }
-        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 35px; }
-        .nav-links a { color: var(--cor-texto); text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
-        .nav-links a:hover { color: var(--cor-destaque); }
-        .theme-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
-        .theme-switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--cor-destaque); }
-        input:checked + .slider:before { transform: translateX(24px); }
-        
-        /* --- SEÇÃO HERO --- */
-        .hero { position: relative; height: 95vh; display: flex; align-items: center; text-align: left; padding: 0; color: #fff; }
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(rgba(4, 13, 28, 0.7), rgba(4, 13, 28, 0.7)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            z-index: -1;
-        }
-        .hero-content { max-width: 650px; }
-        .hero h1 { color: #fff; font-size: 4rem; font-weight: 800; line-height: 1.2; }
-        .hero p { font-size: 1.2rem; color: #e2e8f0; margin: 1.5rem 0 2.5rem 0; }
-        .cta-button {
-            display: inline-block;
-            background: var(--cor-destaque);
-            color: var(--cor-fundo-escuro);
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-        .cta-button:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(66, 242, 167, 0.2); }
-        [data-theme="light"] .cta-button { color: #fff; }
 
-        /* --- SEÇÃO SOBRE PROFISSIONAL --- */
-        #sobre-profissional {
-            background-color: var(--cor-fundo);
-            padding: 80px 0;
-            text-align: center;
-            border-bottom: 1px solid var(--cor-borda);
-        }
-        .profissional-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 800px;
+        .container {
+            max-width: 1200px;
             margin: auto;
-        }
-        .profissional-content img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 30px;
-            border: 5px solid var(--cor-destaque);
-            box-shadow: var(--sombra-padrao);
-        }
-        .profissional-content h2 {
-            margin-bottom: 20px;
-            font-size: 2.5rem;
-        }
-        .profissional-content p {
-            font-size: 1.1rem;
-            color: var(--cor-texto-secundario);
-            margin-bottom: 20px;
+            padding: 0 25px;
         }
 
-        /* --- SEÇÃO SOLUÇÕES --- */
-        #solucoes { background-color: var(--cor-fundo-secundario); transition: background-color 0.3s ease; }
-        .solucoes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            color: var(--cor-texto);
+            transition: color 0.3s ease;
         }
-        .solucao-item {
-            background: var(--cor-fundo);
-            padding: 35px;
-            border-radius: 12px;
-            border: 1px solid var(--cor-borda);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            box-shadow: var(--sombra-padrao);
-        }
-        .solucao-item:hover { transform: translateY(-10px); border-color: var(--cor-destaque); }
-        .solucao-item i { font-size: 2.5rem; color: var(--cor-destaque); margin-bottom: 20px; }
-        .solucao-item h3 { margin-top: 0; font-size: 1.4rem; }
-        .solucao-item p { color: var(--cor-texto-secundario); }
 
-        /* --- SEÇÃO RESULTADOS REAIS --- */
-        .case-card {
-            background: var(--cor-fundo-secundario);
-            border: 1px solid var(--cor-borda);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: var(--sombra-padrao);
+        h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: -0.5px;
         }
-        .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .case-card:hover { transform: translateY(-10px); border-color: var(--cor-destaque); }
-        .case-content { padding: 30px; }
-        .case-metric { font-size: 2.5rem; font-weight: 800; color: var(--cor-destaque); }
-        .case-card h3 { margin-top: 10px; }
-        .case-card blockquote { margin: 20px 0 0 0; padding-left: 15px; border-left: 3px solid var(--cor-destaque); font-style: italic; color: var(--cor-texto-secundario); }
 
-        /* --- SEÇÃO INSTAGRAM --- */
-        #instagram-feed { background-color: var(--cor-fundo-secundario); }
-        .instagram-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        h2 span {
+            color: var(--cor-destaque);
+            font-style: italic;
         }
-        .instagram-post {
-            border-radius: 8px;
-            overflow: hidden;
+
+        section {
+            padding: 100px 0;
             position: relative;
         }
-        .instagram-post img {
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            background: rgba(var(--cor-fundo-secundario), 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--cor-borda);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        [data-theme="dark"] header {
+            background: rgba(20, 20, 20, 0.9);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .logo span {
+            color: var(--cor-destaque);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--cor-destaque);
+        }
+
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--cor-destaque);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 0;
+            color: #fff;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: var(--cor-destaque);
+            color: #fff;
+            padding: 18px 45px;
+            border-radius: 2px;
+            /* Mais quadrado = mais sério/premium */
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            border: 1px solid var(--cor-destaque);
+        }
+
+        .btn-gold:hover {
+            background: transparent;
+            color: var(--cor-destaque);
+        }
+
+        /* --- SOBRE --- */
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .sobre-img-container {
+            position: relative;
+        }
+
+        .sobre-img-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--cor-destaque);
+            z-index: -1;
+        }
+
+        .sobre-img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: var(--sombra-padrao);
+        }
+
+        .sobre-texto h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .sobre-texto p {
+            color: var(--cor-texto-secundario);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        /* --- SERVIÇOS --- */
+        #servicos {
+            background-color: var(--cor-fundo-secundario);
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .servico-card {
+            padding: 40px;
+            background: var(--cor-fundo);
+            border: 1px solid var(--cor-borda);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cor-destaque);
+        }
+
+        .servico-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--cor-destaque);
+            transition: 0.3s;
+        }
+
+        .servico-card:hover::after {
+            width: 100%;
+        }
+
+        .servico-icon {
+            font-size: 2.5rem;
+            color: var(--cor-destaque);
+            margin-bottom: 25px;
+        }
+
+        .servico-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- E-BOOKS (NOVO) --- */
+        #ebooks {
+            background: var(--cor-fundo);
+        }
+
+        .ebook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .ebook-card {
+            background: var(--cor-fundo-secundario);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ebook-card:hover {
+            box-shadow: var(--sombra-padrao);
+            transform: translateY(-5px);
+        }
+
+        .ebook-cover {
+            height: 250px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .ebook-cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
         }
-        .instagram-post:hover img { transform: scale(1.1); }
-        .instagram-link { text-align: center; margin-top: 50px; }
 
-        /* --- SEÇÃO CTA FINAL --- */
-        #cta-diagnostico { background: linear-gradient(45deg, var(--cor-destaque), #34d399); color: var(--cor-fundo-escuro); text-align: center; }
-        [data-theme="light"] #cta-diagnostico { background: linear-gradient(45deg, #0c5ab3, #0a3d62); color: #fff; }
-        #cta-diagnostico h2 { color: inherit; }
-        #cta-diagnostico p { max-width: 600px; margin: 20px auto 30px auto; font-size: 1.1rem; }
-        .cta-button.dark { background: var(--cor-fundo); color: var(--cor-texto); }
-        .cta-button.dark:hover { box-shadow: 0 5px 20px rgba(4, 13, 28, 0.4); }
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--cor-destaque);
+            color: #fff;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 4px;
+        }
 
-        /* --- FOOTER --- */
-        footer {
-            background-color: var(--cor-fundo-secundario);
-            padding: 80px 0 30px 0;
-            border-top: 1px solid var(--cor-borda);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+        .ebook-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--cor-borda);
+
+        .ebook-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-family: var(--fonte-titulo);
         }
-        .footer-col h4 {
+
+        .ebook-desc {
+            font-size: 0.9rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .ebook-price {
+            font-size: 1.4rem;
+            font-weight: 700;
             color: var(--cor-destaque);
             margin-bottom: 20px;
-            font-size: 1.2rem;
         }
-        .footer-col p, .footer-col ul, .footer-col a {
-            color: var(--cor-texto-secundario);
-            text-decoration: none;
-            list-style: none;
-            padding: 0; margin: 0;
-            line-height: 2;
-        }
-        .footer-col a:hover { color: var(--cor-destaque); }
-        .social-links a {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            height: 40px; width: 40px;
-            background: var(--cor-fundo);
-            color: var(--cor-destaque);
-            margin-right: 10px;
-            border-radius: 50%;
-            border: 1px solid var(--cor-borda);
-            transition: all 0.3s ease;
-        }
-        .social-links a:hover {
-            background-color: var(--cor-destaque);
-            color: var(--cor-fundo-secundario);
-            transform: translateY(-3px);
-        }
-        .footer-bottom {
+
+        .btn-buy {
+            display: block;
             text-align: center;
-            padding-top: 30px;
-            color: var(--cor-texto-secundario);
+            background: var(--cor-texto);
+            color: #fff;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: var(--cor-destaque);
+        }
+
+        /* --- INSTAGRAM / CONTATO --- */
+        .social-strip {
+            padding: 40px 0;
+            background: var(--cor-destaque);
+            text-align: center;
+            color: #fff;
+        }
+
+        .social-strip a {
+            color: #fff;
+            font-size: 2rem;
+            margin: 0 15px;
+        }
+
+        .social-strip a:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            background: #111;
+            color: #777;
+            padding: 60px 0 20px;
             font-size: 0.9rem;
         }
 
-        /* --- BOTÃO VOLTAR AO TOPO --- */
-        #scrollTopBtn {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            border: none;
-            outline: none;
-            background-color: var(--cor-destaque);
-            color: var(--cor-fundo);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 18px;
-            box-shadow: var(--sombra-padrao);
-            transition: opacity 0.3s, transform 0.3s;
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
-        #scrollTopBtn:hover { transform: scale(1.1); }
 
-        /* --- RESPONSIVIDADE --- */
-        .hamburger { display: none; cursor: pointer; }
-        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--cor-texto); }
+        .footer-logo {
+            font-family: var(--fonte-titulo);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-logo span {
+            color: var(--cor-destaque);
+        }
+
+        /* RESPONSIVO */
         @media (max-width: 900px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%; top: 75px;
-                gap: 0;
-                flex-direction: column;
-                background: var(--cor-fundo-secundario);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                padding: 20px 0;
-                border-bottom: 1px solid var(--cor-borda);
+            .sobre-grid {
+                grid-template-columns: 1fr;
             }
-            .nav-menu.active { left: 0; }
-            .nav-links { flex-direction: column; gap: 0; width: 100%; }
-            .nav-links li { padding: 15px 0; width: 100%; }
-            .hamburger { display: block; z-index: 1001; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-            .profissional-content img { width: 120px; height: 120px; }
-            .profissional-content h2 { font-size: 2rem; }
+            .sobre-img-container {
+                margin-bottom: 40px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            /* Simplificado para demo, em prod usar JS hamburger */
+            .hamburger {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
         }
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            h2 { font-size: 2.2rem; }
+
+        .hamburger {
+            display: none;
         }
     </style>
 </head>
-<body data-theme="dark">
-    
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
 
-    <header id="main-header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="#inicio" class="logo">
-                    Escala<span>Bis</span> 
-                </a>
-                <div class="nav-menu">
-                    <ul class="nav-links">
-                        <li><a href="#sobre-profissional">Sobre</a></li>
-                        <li><a href="#solucoes">Soluções</a></li>
-                        <li><a href="#cases">Resultados</a></li>
-                        <li><a href="#instagram-feed">Conteúdo</a></li>
-                    </ul>
-                    <label class="theme-switch">
-                        <input type="checkbox" id="theme-toggle" checked>
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="hamburger">
-                    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-                </div>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">Dilvania<span>Teixeira</span></a>
+
+            <nav>
+                <ul class="nav-links nav-menu">
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Consultoria</a></li>
+                    <li><a href="#ebooks">E-books</a></li> <!-- LINK NOVO -->
+                    <li><a href="#contato">Contato</a></li>
+                    <li class="theme-switch-wrapper">
+                        <label class="theme-switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </li>
+                </ul>
+                <div class="hamburger"><i class="fas fa-bars"></i></div>
             </nav>
         </div>
     </header>
 
     <main>
-        <section id="inicio" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Sua empresa pode <span>escalar</span>. Nós mostramos o caminho.</h1>
-                    <p>Oferecemos soluções empresariais especializadas para otimizar operações, aumentar a eficiência e garantir o crescimento sustentável do seu negócio.</p>
-                    <a href="#cta-diagnostico" class="cta-button">Agende um Diagnóstico Gratuito</a>
-                </div>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Estratégia e Liderança <br><span>Para Negócios Reais</span></h1>
+                <p>Transformo empresários em líderes de alta performance através de consultoria estratégica e
+                    inteligência financeira.</p>
+                <a href="#ebooks" class="btn-gold">Conheça Meus Materiais</a>
             </div>
         </section>
 
-        <section id="sobre-profissional">
+        <section id="sobre">
             <div class="container">
-                <div class="profissional-content">
-                    <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop" alt="Foto do Profissional">
-                    <h2>Olá, eu sou <span>[Seu Nome Aqui]</span></h2>
-                    <p>Com X anos de experiência em [sua área principal], minha missão é transformar desafios empresariais em oportunidades de crescimento. Sou apaixonado(a) por [algo que você ama fazer relacionado ao trabalho] e acredito que [sua filosofia ou valor principal].</p>
-                    <p>Na EscalaBis, lidero o desenvolvimento de estratégias inovadoras para [benefício principal].</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="solucoes">
-            <div class="container">
-                <h2>Soluções <span>Completas</span> para seu Negócio</h2>
-                <div class="solucoes-grid">
-                    <div class="solucao-item"> <i class="fas fa-briefcase"></i> <h3>Consultoria Empresarial</h3> <p>Análise detalhada e estratégias práticas para otimizar processos e aumentar a eficiência.</p></div>
-                    <div class="solucao-item"> <i class="fas fa-piggy-bank"></i> <h3>BPO Financeiro</h3> <p>Externalize sua operação financeira com eficiência, redução de custos e mais tempo para crescer.</p></div>
-                    <div class="solucao-item"> <i class="fas fa-cogs"></i> <h3>Gestão Administrativa</h3> <p>Soluções para otimizar o funcionamento diário da sua empresa, garantindo organização e produtividade.</p></div>
-                    <div class="solucao-item"> <i class="fas fa-chart-line"></i> <h3>Estruturação Comercial</h3> <p>Estratégias para ampliar sua carteira de clientes e aumentar as receitas de forma concreta.</p></div>
-                    <div class="solucao-item"> <i class="fas fa-bullhorn"></i> <h3>Marketing Estratégico</h3> <p>Ações criativas e eficazes para impulsionar sua marca e se destacar no mercado.</p></div>
-                    <div class="solucao-item"> <i class="fas fa-users"></i> <h3>Recursos Humanos</h3> <p>Recrutamento e seleção eficientes para formar as equipes de alto desempenho que sua empresa precisa.</p></div>
-                    <div class="solucao-item"> <i class="fas fa-user-tie"></i> <h3>Consultoria Financeira Pessoal</h3> <p>Planejamento e orientação para você otimizar seus recursos e atingir a independência financeira.</p></div>
-                    <div class="solucao-item"> <i class="fas fa-star"></i> <h3>Serviços Sob Demanda</h3> <p>Flexibilidade e agilidade em soluções operacionais e estratégicas adaptadas ao seu contexto.</p></div>
-                    <div class="solucao-item"> <i class="fas fa-book-open"></i> <h3>E-books e Ferramentas</h3> <p>Conteúdo exclusivo e ferramentas práticas para aprofundar conhecimentos e otimizar processos.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="cases">
-            <div class="container">
-                <h2>Resultados <span>Reais</span></h2>
-                <div class="cases-grid">
-                    <div class="case-card">
-                        <div class="case-content">
-                            <div class="case-metric">+40%</div>
-                            <h3>Eficiência Operacional</h3>
-                            <p><strong>Desafio:</strong> Processos manuais e desalinhados que geravam retrabalho e custos elevados.</p>
-                            <blockquote>"A EscalaBis transformou nossa operação. Hoje somos mais rápidos, mais baratos e mais inteligentes."</blockquote>
-                        </div>
+                <div class="sobre-grid reveal">
+                    <div class="sobre-img-container">
+                        <!-- Foto REAL do Instagram -->
+                        <img src="dilvania-profile-final.png" alt="Dilvania Teixeira" class="sobre-img">
                     </div>
-                    <div class="case-card">
-                        <div class="case-content">
-                            <div class="case-metric">+25%</div>
-                            <h3>Aumento nas Vendas</h3>
-                            <p><strong>Desafio:</strong> Time comercial desestruturado e sem um funil de vendas claro para seguir.</p>
-                            <blockquote>"Com a nova estruturação comercial, nosso time finalmente atingiu e superou as metas de vendas."</blockquote>
-                        </div>
-                    </div>
-                    <div class="case-card">
-                        <div class="case-content">
-                            <div class="case-metric">-30%</div>
-                            <h3>Redução de Custos</h3>
-                            <p><strong>Desafio:</strong> Falta de visibilidade financeira e gastos desnecessários que comprometiam a margem.</p>
-                            <blockquote>"O BPO Financeiro nos deu clareza total. Tomamos decisões melhores e cortamos custos que nem sabíamos que tínhamos."</blockquote>
-                        </div>
+                    <div class="sobre-texto">
+                        <h3>Olá, sou Dilvania Teixeira</h3>
+                        <p>Especialista em Educação Financeira e Gestão para Finanças Pessoais e Pequenas Empresas. Com
+                            mais de 10 anos de experiência, dedico minha carreira a transformar a realidade financeira
+                            de pessoas e negócios.</p>
+                        <p>Minha metodologia une conhecimento técnico sólido com uma abordagem prática, focada em
+                            resultados reais. Acredito que a liberdade financeira e o sucesso empresarial são
+                            alcançáveis com a estratégia certa.</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Signature_sample.svg/1200px-Signature_sample.svg.png"
+                            alt="Assinatura" style="height: 50px; opacity: 0.5; margin-top: 20px;">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="instagram-feed">
+        <section id="servicos">
             <div class="container">
-                <h2>Conteúdo Recente do <span>Instagram</span></h2>
-                <div class="instagram-grid">
-                    <div class="instagram-post"><img src="https://via.placeholder.com/300x300/0a192f/42f2a7?text=Post+1" alt="Post do Instagram 1"></div>
-                    <div class="instagram-post"><img src="https://via.placeholder.com/300x300/0a192f/42f2a7?text=Post+2" alt="Post do Instagram 2"></div>
-                    <div class="instagram-post"><img src="https://via.placeholder.com/300x300/0a192f/42f2a7?text=Post+3" alt="Post do Instagram 3"></div>
-                    <div class="instagram-post"><img src="https://via.placeholder.com/300x300/0a192f/42f2a7?text=Post+4" alt="Post do Instagram 4"></div>
-                </div>
-                <div class="instagram-link">
-                    <a href="https://www.instagram.com/escalabis.solutions/" target="_blank" class="cta-button">Siga @escalabis.solutions</a>
+                <h2 class="reveal">Soluções <span>Exclusivas</span></h2>
+                <div class="servicos-grid">
+                    <div class="servico-card reveal">
+                        <i class="fas fa-chess-queen servico-icon"></i>
+                        <h3>Mentoria Empresarial</h3>
+                        <p>Diagnóstico completo para identificar gargalos e otimizar a gestão da sua pequena empresa.
+                        </p>
+                    </div>
+                    <div class="servico-card">
+                        <i class="fas fa-chart-pie servico-icon"></i>
+                        <h3>Educação Financeira</h3>
+                        <p>Aprenda a organizar suas finanças pessoais e investimentos para conquistar sua independência.
+                        </p>
+                    </div>
+                    <div class="servico-card">
+                        <i class="fas fa-users servico-icon"></i>
+                        <h3>Gestão de Negócios</h3>
+                        <p>Estratégias práticas de liderança e processos para alavancar os resultados do seu negócio.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="cta-diagnostico">
+        <!-- NOVA SEÇÃO DE EBOOKS -->
+        <section id="ebooks">
             <div class="container">
-                <h2>Descubra o Potencial Oculto da Sua Empresa</h2>
-                <p>Em uma sessão estratégica gratuita de 45 minutos, vamos analisar um ponto crítico do seu negócio e te entregar um plano de ação com 3 passos que você pode implementar imediatamente.</p>
-                <a href="#" class="cta-button dark">Quero Meu Diagnóstico Gratuito</a>
+                <h2>Conhecimento <span>Digital</span></h2>
+                <p
+                    style="text-align: center; max-width: 600px; margin: 0 auto 50px; color: var(--cor-texto-secundario);">
+                    Manuais práticos e guias estratégicos disponíveis para download imediato.
+                </p>
+
+                <div class="ebook-grid">
+                    <!-- Produto 1 -->
+                    <div class="ebook-card reveal">
+                        <div class="ebook-cover">
+                            <span class="badge">Mais Vendido</span>
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="ebook-info">
+                            <h3 class="ebook-title">Gestão 360º na Prática</h3>
+                            <p class="ebook-desc">O guia definitivo para organizar sua empresa do zero ao avançado sem
+                                burocracia.</p>
+                            <div class="ebook-price">R$ 97,90</div>
+                            <a href="ebook-gestao-360.html" class="btn-buy">Ver Detalhes e Comprar</a>
+                        </div>
+                    </div>
+
+                    <!-- Produto 2 -->
+                    <div class="ebook-card reveal">
+                        <div class="ebook-cover">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="ebook-info">
+                            <h3 class="ebook-title">Líder do Futuro</h3>
+                            <p class="ebook-desc">Como inspirar equipes e reter talentos na era digital. Ferramentas de
+                                feedback e cultura.</p>
+                            <div class="ebook-price">R$ 67,00</div>
+                            <a href="ebook-lider-futuro.html" class="btn-buy">Ver Detalhes e Comprar</a>
+                        </div>
+                    </div>
+
+                    <!-- Produto 3 -->
+                    <div class="ebook-card reveal">
+                        <div class="ebook-cover" style="padding: 0; background: none;">
+                            <img src="ebook-financas-cover.png" alt="Capa Livro Finanças"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="ebook-info">
+                            <h3 class="ebook-title">10 Passos para uma Vida Financeira Consciente</h3>
+                            <p class="ebook-desc">Organize sua vida financeira com clareza, responsabilidade e menos
+                                pressão.</p>
+                            <div class="ebook-price">R$ 49,90</div>
+                            <a href="ebook-financas.html" class="btn-buy">Ver Detalhes e Comprar</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        
-    </main>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="#inicio" class="logo">
-                        Escala<span>Bis</span>
+
+        <section class="social-strip">
+            <div class="container">
+                <h3>Siga-me nas redes sociais</h3>
+                <div style="margin-top: 30px;">
+                    <a href="https://www.instagram.com/dilvania.teixeira" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://br.linkedin.com/in/dilvaniateixeira" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://wa.me/5511982675531" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" style="background-color: var(--cor-fundo-secundario);">
+            <div class="container">
+                <h2>Vamos <span>Conversar?</span></h2>
+                <div style="text-align: center; max-width: 700px; margin: auto;">
+                    <p>Entre em contato para agendar uma reunião ou tirar dúvidas.</p>
+                    <p style="margin-top: 20px; font-size: 1.1rem; color: var(--cor-texto);">
+                        <i class="fas fa-map-marker-alt" style="color: var(--cor-destaque);"></i> Carapicuíba - SP
+                        &nbsp;|&nbsp;
+                        <i class="fas fa-phone" style="color: var(--cor-destaque);"></i> (11) 98267-5531
+                    </p>
+                    <a href="mailto:dilvania.teixeira@dsop.com.br"
+                        style="display: inline-block; margin-top: 20px; font-size: 1.2rem; color: var(--cor-destaque); font-weight: 700;">
+                        dilvania.teixeira@dsop.com.br
                     </a>
-                    <p style="margin-top: 20px;">Soluções empresariais que unem estratégia e tecnologia para destravar o seu crescimento.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navegue</h4>
-                    <ul>
-                        <li><a href="#sobre-profissional">Sobre</a></li>
-                        <li><a href="#solucoes">Soluções</a></li>
-                        <li><a href="#cases">Resultados</a></li>
-                        <li><a href="#instagram-feed">Conteúdo</a></li>
-                        <li><a href="#cta-diagnostico">Diagnóstico Gratuito</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contato</h4>
-                    <p><i class="fas fa-envelope" style="margin-right: 8px; color: var(--cor-destaque);"></i> <a href="mailto:contato@escalabis.com.br">contato@escalabis.com.br</a></p>
-                    <p><i class="fas fa-phone" style="margin-right: 8px; color: var(--cor-destaque);"></i> <a href="tel:+5511988391763">(11) 98839-1763</a></p>
-                </div>
-                <div class="footer-col">
-                    <h4>Siga-nos</h4>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/escalabis.solutions/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 EscalaBis. Todos os direitos reservados.</p>
-            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">Dilvania<span>Teixeira</span></div>
+            <p>&copy; 2026 Dilvania Teixeira. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <button onclick="topFunction()" id="scrollTopBtn" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
-
     <script>
-        // --- SCRIPT DO MENU HAMBURGER ---
-        const hamburger = document.querySelector(".hamburger");
-        const navMenu = document.querySelector(".nav-menu");
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-        });
-
-        // --- SCRIPT DO SELETOR DE TEMA ---
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        // Adiciona um listener para a mudança de tema
-        themeToggle.addEventListener('change', function() {
-            const selectedTheme = this.checked ? 'dark' : 'light';
-            body.setAttribute('data-theme', selectedTheme);
-            localStorage.setItem('theme', selectedTheme); // Salva a preferência
-            updateLogoVisibility(selectedTheme);
-        });
-
-        // Função para atualizar a visibilidade do logo
-        function updateLogoVisibility(theme) {
-            const darkLogos = document.querySelectorAll('.dark-mode-only');
-            const lightLogos = document.querySelectorAll('.light-mode-only');
-
-            darkLogos.forEach(logo => logo.style.display = theme === 'dark' ? 'inline-block' : 'none');
-            lightLogos.forEach(logo => logo.style.display = theme === 'light' ? 'inline-block' : 'none');
-            
-            // Se nenhum logo específico for encontrado, mostra o texto do logo
-            const textLogos = document.querySelectorAll('.logo');
-            textLogos.forEach(logo => {
-                const hasImage = logo.querySelector('.logo-img');
-                if (!hasImage) {
-                    logo.style.display = 'inline-block'; // Garante que o texto logo esteja visível se não houver imagem
-                } else if (hasImage && !hasImage.style.display && (!logo.querySelector('.dark-mode-only') || !logo.querySelector('.light-mode-only'))) {
-                    // Se houver imagens mas elas não estiverem ativas (por exemplo, apenas 1 modo de logo), o texto se esconde
-                    logo.childNodes[0].nodeValue = ''; // Limpa o texto "EscalaBis"
-                }
-            });
-        }
-
-        // Aplica o tema salvo ou padrão ao carregar a página
+        // Theme Toggle logic
+        const toggleSwitch = document.querySelector('#theme-toggle');
         const currentTheme = localStorage.getItem('theme');
+
         if (currentTheme) {
-            applyTheme(currentTheme);
-        } else {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            applyTheme(prefersDark ? 'dark' : 'light');
-        }
-
-        // Função auxiliar para aplicar tema e atualizar logo
-        function applyTheme(theme) {
-            body.setAttribute('data-theme', theme);
-            themeToggle.checked = theme === 'dark';
-            updateLogoVisibility(theme);
-        }
-
-        // --- SCRIPT DO CURSOR PERSONALIZADO ---
-        const cursorDot = document.querySelector(".cursor-dot");
-        const cursorOutline = document.querySelector(".cursor-outline");
-        window.addEventListener("mousemove", function (e) {
-            const posX = e.clientX;
-            const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
-        });
-        const interactiveElements = document.querySelectorAll("a, button, input[type='checkbox'], .slider, .solucao-item, .case-card, .instagram-post");
-        interactiveElements.forEach((el) => {
-            el.addEventListener("mouseover", () => cursorOutline.classList.add("hover"));
-            el.addEventListener("mouseleave", () => cursorOutline.classList.remove("hover"));
-        });
-
-        // --- SCRIPT DO BOTÃO VOLTAR AO TOPO ---
-        const scrollTopBtn = document.getElementById("scrollTopBtn");
-        window.onscroll = function() {scrollFunction()};
-        function scrollFunction() {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                scrollTopBtn.style.display = "block";
-            } else {
-                scrollTopBtn.style.display = "none";
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
             }
         }
-        function topFunction() {
-            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
-            document.body.scrollTop = 0; // Para Safari
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
         }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+
+        // Hamburger Menu (Simple toggle for mobile)
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '70px';
+                navMenu.style.right = '0';
+                navMenu.style.background = 'var(--cor-fundo-secundario)';
+                navMenu.style.width = '100%';
+                navMenu.style.padding = '20px';
+                navMenu.style.borderBottom = '1px solid var(--cor-borda)';
+            }
+        });
+
+        // SCROLL REVEAL ANIMATION
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+                if (revealtop < windowheight - revealpoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        // Dispara uma vez ao carregar para mostrar o que já está na tela
+        reveal();
     </script>
 </body>
+
 </html>

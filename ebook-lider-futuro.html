@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Líder do Futuro - Desenvolva a liderança que retém talentos e inspira equipes.">
+    <title>Líder do Futuro | Dilvania Teixeira</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <style>
+        /* DESIGN SYSTEM (Igual ao Gestão 360) */
+        :root {
+            --cor-fundo: #fdfbf7;
+            --cor-fundo-secundario: #ffffff;
+            --cor-destaque: #c5a059;
+            --cor-texto: #1a1a1a;
+            --cor-texto-secundario: #555;
+            --cor-borda: #e0e0e0;
+            --sombra-padrao: 0 10px 30px rgba(197, 160, 89, 0.15);
+            --fonte-titulo: 'Playfair Display', serif;
+            --fonte-corpo: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: var(--fonte-corpo);
+            margin: 0;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 0 25px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--cor-borda);
+            text-align: center;
+            background: #fff;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            font-family: var(--fonte-titulo);
+        }
+
+        .logo span {
+            color: var(--cor-destaque);
+        }
+
+        .hero-produto {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-produto h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-produto span {
+            color: var(--cor-destaque);
+            font-style: italic;
+        }
+
+        .hero-produto p {
+            font-size: 1.2rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .book-mockup {
+            width: 200px;
+            height: 300px;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            /* Azulado para Liderança */
+            margin: 0 auto 40px;
+            border-radius: 5px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-direction: column;
+            border-left: 10px solid #c5a059;
+        }
+
+        .btn-checkout {
+            background: #27ae60;
+            color: #fff;
+            padding: 20px 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.4);
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-checkout:hover {
+            transform: scale(1.05);
+            background: #219150;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(39, 174, 96, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+            }
+        }
+
+        .benefits {
+            background: #fff;
+            padding: 80px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .benefit-item i {
+            font-size: 2rem;
+            color: var(--cor-destaque);
+            margin-bottom: 20px;
+        }
+
+        .guarantee {
+            background: #fdfbf7;
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--cor-borda);
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Dilvania<span>Teixeira</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-produto">
+            <div class="container">
+                <div class="book-mockup">
+                    <i class="fas fa-gem" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <span style="font-family: var(--fonte-titulo); font-size: 1.2rem;">Líder do Futuro</span>
+                </div>
+                <h1>Torne-se o Líder que <br><span>Todos Querem Seguir</span></h1>
+                <p>O guia essencial para gestores que desejam inspirar equipes, reduzir o turnover e criar uma cultura
+                    organizacional de alta performance.</p>
+
+                <a href="https://pay.kiwify.com.br/ipY4f19" class="btn-checkout">
+                    QUERO ME TORNAR UM LÍDER <br>
+                    <span style="font-size: 0.9rem; font-weight: 400;">Apenas R$ 67,00</span>
+                </a>
+
+                <p style="margin-top: 20px; font-size: 0.9rem;"><i class="fas fa-lock"></i> Pagamento 100% Seguro via
+                    KiwiFi</p>
+            </div>
+        </section>
+
+        <section class="benefits">
+            <div class="container">
+                <h2 style="text-align: center;">Pilares da <span>Liderança 4.0</span></h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-brain"></i>
+                        <h3>Inteligência Emocional</h3>
+                        <p>Aprenda a gerir suas emoções e as da sua equipe para resolver conflitos com maestria.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-comments"></i>
+                        <h3>Feedback Assertivo</h3>
+                        <p>Técnicas para dar e receber feedbacks que realmente geram mudança de comportamento.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-users-cog"></i>
+                        <h3>Delegação Eficaz</h3>
+                        <p>Pare de centralizar. Saiba como delegar tarefas confiavelmente e ter mais tempo estratégico.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guarantee">
+            <div class="container">
+                <i class="fas fa-shield-alt"
+                    style="font-size: 4rem; color: var(--cor-destaque); margin-bottom: 20px;"></i>
+                <h2>Garantia de Satisfação</h2>
+                <p>Teste o material por 7 dias. Se não gostar, devolvemos seu investimento integralmente.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Dilvania Teixeira. Todos os direitos reservados.</p>
+            <p>Dúvidas? <a href="https://wa.me/5511982675531" style="color: var(--cor-destaque);">Fale no WhatsApp</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
