@@ -1,0 +1,417 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>{{ site_settings.hero_title|linebreaksbr }}</h1>
+            <p>{{ site_settings.hero_subtitle }}</p>
+            <a href="#ebooks" class="btn-gold">{{ site_settings.hero_button_text }}</a>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <div class="container">
+            <div class="sobre-grid reveal">
+                <div class="sobre-img-container">
+                    <!-- Foto REAL do Instagram -->
+                    {% if site_settings.about_image %}
+                    <img src="{{ site_settings.about_image.url }}" alt="Dilvania Teixeira" class="sobre-img">
+                    {% else %}
+                    <img src="{% static 'img/dilvania-profile-final.png' %}" alt="Dilvania Teixeira" class="sobre-img">
+                    {% endif %}
+                </div>
+                <div class="sobre-texto">
+                    <h3>{{ site_settings.about_title }}</h3>
+                    <p>{{ site_settings.about_description|linebreaksbr }}</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Signature_sample.svg/1200px-Signature_sample.svg.png"
+                        alt="Assinatura" style="height: 50px; opacity: 0.5; margin-top: 20px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos">
+        <div class="container">
+            <h2 class="reveal">Soluções <span>Exclusivas</span></h2>
+            <div class="servicos-grid">
+                {% for service in services %}
+                <div class="servico-card reveal">
+                    <i class="{{ service.icon }} servico-icon"></i>
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMULADOR DE PROSPERIDADE (SURPRISE INGREDIENT) -->
+    <section id="simulador"
+        style="background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%); color: #fff; padding: 80px 0;">
+        <div class="container">
+            <h2 class="reveal" style="text-align: center; color: #fff; margin-bottom: 10px;">Simulador de
+                <span>Prosperidade</span>
+            </h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 50px; opacity: 0.8;">
+                Descubra o poder dos juros compostos. Veja quanto você pode acumular investindo com consistência e
+                inteligência.
+            </p>
+
+            <div class="calculator-wrapper"
+                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; max-width: 800px; margin: 0 auto;">
+                <div class="calc-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                    <!-- Inputs -->
+                    <div class="calc-inputs">
+                        <div style="margin-bottom: 25px;">
+                            <label
+                                style="display: block; margin-bottom: 10px; font-weight: 600; color: #c5a059;">Investimento
+                                Inicial (R$)</label>
+                            <input type="number" id="initial" value="0"
+                                style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem;">
+                        </div>
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #c5a059;">Aporte
+                                Mensal (R$)</label>
+                            <input type="number" id="monthly" value="500"
+                                style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem;">
+                        </div>
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #c5a059;">Tempo
+                                (Anos)</label>
+                            <input type="range" id="years" min="1" max="30" value="10"
+                                style="width: 100%; cursor: pointer; accent-color: #c5a059;"
+                                oninput="document.getElementById('years-val').innerText = this.value + ' anos'">
+                            <div id="years-val" style="text-align: right; margin-top: 5px; font-weight: bold;">10 anos
+                            </div>
+                        </div>
+                        <button onclick="calculateWealth()"
+                            style="width: 100%; padding: 15px; background: #c5a059; border: none; border-radius: 50px; color: #fff; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px;">
+                            SIMULAR MEU FUTURO
+                        </button>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="calc-results"
+                        style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px;">
+                        <p style="font-size: 1.2rem; margin-bottom: 10px; opacity: 0.8;">Em <span
+                                id="res-years">10</span> anos você terá:</p>
+                        <div id="total-val"
+                            style="font-size: 3.5rem; font-weight: 800; color: #c5a059; line-height: 1.1; margin-bottom: 20px;">
+                            R$ 0,00
+                        </div>
+                        <div style="font-size: 0.9rem; margin-bottom: 30px;">
+                            <span style="display: block; margin-bottom: 5px;">Total Investido: <strong id="invested-val"
+                                    style="color: #fff;">R$ 0,00</strong></span>
+                            <span style="display: block;">Juros ganhos: <strong id="interest-val"
+                                    style="color: #25d366;">R$ 0,00</strong></span>
+                        </div>
+                        <p style="font-size: 0.9rem; opacity: 0.7; font-style: italic;">Considerando taxa média de 10%
+                            a.a.</p>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function calculateWealth() {
+                    let initial = parseFloat(document.getElementById('initial').value) || 0;
+                    let monthly = parseFloat(document.getElementById('monthly').value) || 0;
+                    let years = parseInt(document.getElementById('years').value) || 10;
+                    let rate = 0.10; // 10% per year
+                    let monthlyRate = rate / 12;
+                    let months = years * 12;
+
+                    let futureValue = initial * Math.pow(1 + monthlyRate, months) +
+                        (monthly * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
+
+                    let totalInvested = initial + (monthly * months);
+                    let interest = futureValue - totalInvested;
+
+                    // Format
+                    let formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+                    document.getElementById('total-val').innerText = formatter.format(futureValue);
+                    document.getElementById('invested-val').innerText = formatter.format(totalInvested);
+                    document.getElementById('interest-val').innerText = formatter.format(interest);
+                    document.getElementById('res-years').innerText = years;
+                }
+
+                // Init
+                window.onload = calculateWealth;
+            </script>
+        </div>
+    </section>
+
+    <!-- EXCLUSIVE BONUS SECTION -->
+    <section id="bonus"
+        style="background: #fdfbf7; padding: 100px 0; text-align: center; border-bottom: 1px solid #eee;">
+        <div class="container">
+            <div
+                style="background: white; border: 2px dashed #c5a059; border-radius: 20px; padding: 60px 40px; max-width: 900px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.08); position: relative; overflow: hidden;">
+
+                <!-- Ribbon -->
+                <div
+                    style="position: absolute; top: 30px; right: -50px; background: #c5a059; color: white; padding: 10px 100px; transform: rotate(45deg); font-weight: bold; font-size: 0.9rem; letter-spacing: 2px; box-shadow: 0 5px 10px rgba(0,0,0,0.2);">
+                    BRINDE</div>
+
+                <i class="fas fa-gift scale-loop"
+                    style="font-size: 4rem; color: #c5a059; margin-bottom: 30px; display: inline-block;"></i>
+
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #1a1a1a; font-weight: 800; line-height: 1.2;">
+                    O "Pulo do Gato" que Faltava na Sua <span
+                        style="color: #c5a059; font-style: italic; font-family: 'Playfair Display', serif;">Gestão</span>
+                </h2>
+
+                <p style="font-size: 1.2rem; color: #555; max-width: 700px; margin: 0 auto 40px; line-height: 1.8;">
+                    Eu preparei algo que você não encontra em lugar nenhum. Não é apenas uma planilha, é o <strong>Mapa
+                        do Tesouro</strong> da sua liberdade financeira.
+                    Simples, direta e extremamente poderosa. <br><br>
+                    <strong style="color: #1a1a1a;">É o meu presente exclusivo para você começar com o pé
+                        direito.</strong>
+                </p>
+
+                <a href="{% if site_settings.bonus_spreadsheet %}{{ site_settings.bonus_spreadsheet.url }}{% else %}{% static 'docs/planilha_financeira_exclusiva.csv' %}{% endif %}"
+                    download class="btn-checkout-lg"
+                    style="display: inline-block; width: auto; padding: 20px 60px; font-size: 1.1rem; box-shadow: 0 10px 30px rgba(197, 160, 89, 0.4);">
+                    <i class="fas fa-download" style="margin-right: 15px;"></i> BAIXAR "O MAPA DO TESOURO"
+                </a>
+
+                <p
+                    style="margin-top: 20px; font-size: 0.85rem; color: #999; text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="fas fa-lock"></i> Acesso Gratuito e Instantâneo
+                </p>
+
+                <style>
+                    @keyframes scaleLoop {
+                        0% {
+                            transform: scale(1);
+                        }
+
+                        50% {
+                            transform: scale(1.1);
+                        }
+
+                        100% {
+                            transform: scale(1);
+                        }
+                    }
+
+                    .scale-loop {
+                        animation: scaleLoop 3s infinite ease-in-out;
+                    }
+                </style>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOVA SEÇÃO DE EBOOKS -->
+    <section id="ebooks">
+        <div class="container">
+            <h2>Conhecimento <span>Digital</span></h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 50px; color: var(--cor-texto-secundario);">
+                Manuais práticos e guias estratégicos disponíveis para download imediato.
+            </p>
+
+            <div class="ebook-grid">
+                {% for product in products %}
+                <div class="ebook-card reveal">
+                    <div class="ebook-cover {% if product.cover_image %}has-image{% endif %}">
+                        {% if product.cover_image %}
+                        <img src="{{ product.cover_image.url }}" alt="Capa {{ product.title }}"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                        {% else %}
+                        <i class="fas fa-book"></i>
+                        {% endif %}
+                    </div>
+                    <div class="ebook-info">
+                        <h3 class="ebook-title">{{ product.title }}</h3>
+                        <p class="ebook-desc">{{ product.description|truncatechars:100 }}</p>
+                        <div class="ebook-price">R$ {{ product.price }}</div>
+                        <a href="{% url 'product_detail' product.slug %}" class="btn-buy">Ver Detalhes e Comprar</a>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="text-align: center; width: 100%;">Nenhum produto cadastrado ainda.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="social-strip">
+        <div class="container">
+            <h3>Siga-me nas redes sociais</h3>
+            <div style="margin-top: 30px;">
+                <a href="https://www.instagram.com/dilvania.teixeira" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://br.linkedin.com/in/dilvaniateixeira" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/5511989996055" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" style="background-color: var(--cor-fundo-secundario);">
+        <div class="container">
+            <h2>Vamos <span>Conversar?</span></h2>
+            <div style="text-align: center; max-width: 700px; margin: auto;">
+
+                {% if messages %}
+                {% for message in messages %}
+                <div
+                    style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <p>Entre em contato para agendar uma reunião ou tirar dúvidas. Preencha o formulário abaixo:</p>
+
+                <style>
+                    .contact-form-wrapper {
+                        background: #ffffff;
+                        padding: 40px;
+                        border-radius: 16px;
+                        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+                        max-width: 650px;
+                        margin: 40px auto 0;
+                        text-align: left;
+                        border: 1px solid rgba(0, 0, 0, 0.05);
+                    }
+
+                    .form-group {
+                        margin-bottom: 25px;
+                    }
+
+                    .form-label {
+                        display: block;
+                        font-weight: 600;
+                        margin-bottom: 8px;
+                        color: #2c3e50;
+                        font-size: 0.95rem;
+                        letter-spacing: 0.5px;
+                    }
+
+                    .form-control {
+                        width: 100%;
+                        padding: 14px 18px;
+                        border: 2px solid #eef0f5;
+                        border-radius: 10px;
+                        font-size: 1rem;
+                        color: #333;
+                        background: #fdfdfd;
+                        transition: all 0.3s ease;
+                        box-sizing: border-box;
+                    }
+
+                    .form-control:focus {
+                        border-color: #c5a059;
+                        background: #fff;
+                        outline: none;
+                        box-shadow: 0 5px 15px rgba(197, 160, 89, 0.15);
+                    }
+
+                    .form-control::placeholder {
+                        color: #aaa;
+                    }
+
+                    .btn-submit-premium {
+                        background: linear-gradient(135deg, #c5a059 0%, #a67c00 100%);
+                        color: white;
+                        padding: 18px 30px;
+                        border: none;
+                        border-radius: 10px;
+                        font-size: 1.1rem;
+                        font-weight: 700;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        width: 100%;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+                    }
+
+                    .btn-submit-premium:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4);
+                        background: linear-gradient(135deg, #d4af6a 0%, #b88a00 100%);
+                    }
+
+                    .btn-submit-premium i {
+                        margin-right: 10px;
+                    }
+                </style>
+
+                <form id="contactForm" onsubmit="event.preventDefault(); sendEmail();" class="contact-form-wrapper">
+                    {% csrf_token %}
+
+                    <!-- Nome -->
+                    <div class="form-group">
+                        <label for="id_name" class="form-label">SEU NOME</label>
+                        <input type="text" name="name" maxlength="100" required id="id_name" class="form-control"
+                            placeholder="Digite seu nome completo">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="id_email" class="form-label">SEU E-MAIL</label>
+                        <input type="email" name="email" maxlength="254" required id="id_email" class="form-control"
+                            placeholder="exemplo@email.com">
+                    </div>
+
+                    <!-- Telefone -->
+                    <div class="form-group">
+                        <label for="id_phone" class="form-label">WHATSAPP</label>
+                        <input type="text" name="phone" maxlength="20" required id="id_phone" class="form-control"
+                            placeholder="(DDD) 99999-9999">
+                    </div>
+
+                    <!-- Mensagem -->
+                    <div class="form-group">
+                        <label for="id_message" class="form-label">COMO POSSO TE AJUDAR?</label>
+                        <textarea name="message" cols="40" rows="4" required id="id_message" class="form-control"
+                            placeholder="Escreva sua mensagem aqui..."></textarea>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 35px;">
+                        <button type="submit" class="btn-submit-premium">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                        </button>
+                    </div>
+                </form>
+
+                <script>
+                    function sendEmail() {
+                        var name = document.getElementById('id_name').value;
+                        var email = document.getElementById('id_email').value;
+                        var phone = document.getElementById('id_phone').value;
+                        var message = document.getElementById('id_message').value;
+
+                        var subject = "Contato via Site - " + name;
+                        var body = "Nome: " + name + "\n" +
+                            "Email: " + email + "\n" +
+                            "WhatsApp: " + phone + "\n\n" +
+                            "Mensagem:\n" + message;
+
+                        var mailtoLink = "mailto:dilvania.teixeira@dsop.com.br" +
+                            "?subject=" + encodeURIComponent(subject) +
+                            "&body=" + encodeURIComponent(body);
+
+                        window.location.href = mailtoLink;
+                    }
+                </script>
+
+                <p style="margin-top: 20px; font-size: 1.1rem; color: var(--cor-texto);">
+                    <i class="fas fa-map-marker-alt" style="color: var(--cor-destaque);"></i> Carapicuíba - SP
+                    &nbsp;|&nbsp;
+                    <i class="fas fa-phone" style="color: var(--cor-destaque);"></i> (11) 98999-6055
+                </p>
+                <a href="mailto:dilvania.teixeira@dsop.com.br"
+                    style="display: inline-block; margin-top: 20px; font-size: 1.2rem; color: var(--cor-destaque); font-weight: 700;">
+                    dilvania.teixeira@dsop.com.br
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

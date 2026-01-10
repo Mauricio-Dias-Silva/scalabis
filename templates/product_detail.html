@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <style>
+        .product-hero-wrapper {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #fdfbf7 0%, #fff 100%);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            /* More space for text */
+            gap: 80px;
+            align-items: center;
+        }
+
+        .product-image-col {
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .product-image-col img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .product-image-col img:hover {
+            transform: scale(1.03) rotateY(5deg);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .product-info-col {
+            padding-right: 20px;
+        }
+
+        .product-info-col h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            letter-spacing: -1px;
+            font-weight: 800;
+        }
+
+        .product-info-col h1 span {
+            display: block;
+            font-size: 1.8rem;
+            color: #c5a059;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            margin-top: 10px;
+            letter-spacing: 0;
+        }
+
+        .product-description {
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin: 30px 0;
+            line-height: 1.8;
+            border-left: 4px solid #c5a059;
+            padding-left: 20px;
+        }
+
+        .product-price-tag {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: inline-flex;
+            flex-direction: column;
+            margin-bottom: 40px;
+            border: 1px solid #eee;
+        }
+
+        .price-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .price-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1;
+        }
+
+        .btn-checkout-lg {
+            display: block;
+            background: linear-gradient(45deg, #c5a059, #e0c078);
+            color: white;
+            padding: 25px 40px;
+            border-radius: 100px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .btn-checkout-lg:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(197, 160, 89, 0.5);
+        }
+
+        /* Pulse Animation for CTA */
+        @keyframes pulse-gold {
+            0% {
+                box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(197, 160, 89, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
+            }
+        }
+
+        .btn-checkout-lg {
+            animation: pulse-gold 2s infinite;
+        }
+
+        @media (max-width: 900px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                text-align: center;
+            }
+
+            .product-description {
+                border-left: none;
+                padding-left: 0;
+            }
+
+            .product-price-tag {
+                display: inline-flex;
+                margin: 0 auto 30px;
+            }
+
+            .product-info-col h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+
+    <div class="product-hero-wrapper">
+        <div class="container">
+            <div class="product-grid">
+                <!-- Coluna Esquerda: Imagem -->
+                <div class="product-image-col">
+                    {% if product.cover_image %}
+                    <img src="{{ product.cover_image.url }}" alt="Capa {{ product.title }}">
+                    {% else %}
+                    <div
+                        style="width: 100%; height: 400px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                        <i class="fas fa-book" style="font-size: 5rem; color: #ccc;"></i>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Coluna Direita: Informações -->
+                <div class="product-info-col">
+                    <h1>{{ product.title }} <span>{{ product.subtitle }}</span></h1>
+
+                    <div class="product-description">{{ product.description|safe|linebreaks }}</div>
+
+                    <div class="product-price-tag">
+                        <span class="price-label">{{ product.price_label }}</span>
+                        <span class="price-value">R$ {{ product.price }}</span>
+                    </div>
+
+                    <a href="{{ product.kiwifi_url }}" class="btn-checkout-lg" target="_blank">
+                        {{ product.cta_text }}
+                    </a>
+
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: #777; text-align: center;">
+                        <i class="fas fa-lock" style="color: #25d366;"></i> {{ product.guarantee_text }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="benefits">
+        <div class="container">
+            <h2 style="text-align: center;">{{ product.benefits_title }}</h2>
+            <div class="benefits-grid">
+                {% for benefit in benefits %}
+                <div class="benefit-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Benefício Exclusivo</h3>
+                    <p>{{ benefit }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <div style="text-align: center; margin-bottom: 60px;">
+        <a href="{% url 'home' %}" style="text-decoration: underline; color: #555;">&larr; Voltar para a Home</a>
+    </div>
+</main>
+{% endblock %}

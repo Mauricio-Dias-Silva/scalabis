@@ -1,0 +1,724 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Dilvania Teixeira - Consultoria Empresarial e Estratégica. Escale seu negócio com gestão eficiente, inteligência financeira e liderança de alta performance.">
+    <meta name="keywords"
+        content="Dilvania Teixeira, Consultoria Empresarial, Gestão de Negócios, Ebooks de Gestão, Mentoria Empresarial, Estratégia de Negócios">
+    <title>Dilvania Teixeira | Consultoria Estratégica de Alta Performance</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dilvania Teixeira",
+      "url": "https://www.dilvaniateixeira.com.br",
+      "sameAs": [
+        "https://www.instagram.com/dilvania.teixeira",
+        "https://br.linkedin.com/in/dilvaniateixeira"
+      ],
+      "jobTitle": "Consultora Empresarial",
+    "description": "Especialista em alavancagem de negócios e gestão estratégica."
+    }
+    </script>
+
+    <!-- OPEN GRAPH / WHATSAPP / FACEBOOK / LINKEDIN -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.dilvaniateixeira.com.br/">
+    <meta property="og:title" content="Dilvania Teixeira | Consultoria Estratégica">
+    <meta property="og:description"
+        content="Transforme seu negócio com gestão eficiente e liderança de alta performance. Conheça meus livros e mentorias.">
+    <meta property="og:image" content="https://www.dilvaniateixeira.com.br/dilvania-profile-final.png">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- TWITTER -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.dilvaniateixeira.com.br/">
+    <meta property="twitter:title" content="Dilvania Teixeira | Consultoria Estratégica">
+    <meta property="twitter:description"
+        content="Transforme seu negócio com gestão eficiente e liderança de alta performance.">
+    <meta property="twitter:image" content="https://www.dilvaniateixeira.com.br/dilvania-profile-final.png">
+
+    <style>
+        /* --- PALETA DE CORES E CONFIGURAÇÕES GLOBAIS --- */
+        :root {
+            /* TEMA CLARO (PREMIUM) */
+            --cor-fundo: #fdfbf7;
+            /* Creme bem suave */
+            --cor-fundo-secundario: #ffffff;
+            --cor-destaque: #c5a059;
+            /* Dourado luxo */
+            --cor-destaque-hover: #b08d48;
+            --cor-texto: #1a1a1a;
+            --cor-texto-secundario: #555;
+            --cor-borda: #e0e0e0;
+            --sombra-padrao: 0 10px 30px rgba(197, 160, 89, 0.15);
+            --fonte-titulo: 'Playfair Display', serif;
+            --fonte-corpo: 'Poppins', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            /* TEMA ESCURO (PREMIUM DARK) */
+            --cor-fundo: #0a0a0a;
+            --cor-fundo-secundario: #141414;
+            --cor-destaque: #d4af37;
+            /* Dourado metálico */
+            --cor-destaque-hover: #f1c40f;
+            --cor-texto: #f0f0f0;
+            --cor-texto-secundario: #b0b0b0;
+            --cor-borda: #2a2a2a;
+            --sombra-padrao: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--fonte-corpo);
+            margin: 0;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* --- ANIMAÇÕES (WOW FACTOR) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 25px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            color: var(--cor-texto);
+            transition: color 0.3s ease;
+        }
+
+        h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: -0.5px;
+        }
+
+        h2 span {
+            color: var(--cor-destaque);
+            font-style: italic;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            background: rgba(var(--cor-fundo-secundario), 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--cor-borda);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        [data-theme="dark"] header {
+            background: rgba(20, 20, 20, 0.9);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .logo span {
+            color: var(--cor-destaque);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--cor-destaque);
+        }
+
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--cor-destaque);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 0;
+            color: #fff;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: var(--cor-destaque);
+            color: #fff;
+            padding: 18px 45px;
+            border-radius: 2px;
+            /* Mais quadrado = mais sério/premium */
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            border: 1px solid var(--cor-destaque);
+        }
+
+        .btn-gold:hover {
+            background: transparent;
+            color: var(--cor-destaque);
+        }
+
+        /* --- SOBRE --- */
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .sobre-img-container {
+            position: relative;
+        }
+
+        .sobre-img-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--cor-destaque);
+            z-index: -1;
+        }
+
+        .sobre-img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: var(--sombra-padrao);
+        }
+
+        .sobre-texto h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .sobre-texto p {
+            color: var(--cor-texto-secundario);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        /* --- SERVIÇOS --- */
+        #servicos {
+            background-color: var(--cor-fundo-secundario);
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .servico-card {
+            padding: 40px;
+            background: var(--cor-fundo);
+            border: 1px solid var(--cor-borda);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cor-destaque);
+        }
+
+        .servico-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--cor-destaque);
+            transition: 0.3s;
+        }
+
+        .servico-card:hover::after {
+            width: 100%;
+        }
+
+        .servico-icon {
+            font-size: 2.5rem;
+            color: var(--cor-destaque);
+            margin-bottom: 25px;
+        }
+
+        .servico-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- E-BOOKS (NOVO) --- */
+        #ebooks {
+            background: var(--cor-fundo);
+        }
+
+        .ebook-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .ebook-card {
+            flex: 0 1 380px;
+            /* Base size 380px, shrink allowed, no grow beyond base */
+            width: 100%;
+            /* Ensure responsiveness on small screens */
+            min-width: 280px;
+            background: var(--cor-fundo-secundario);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ebook-card:hover {
+            box-shadow: var(--sombra-padrao);
+            transform: translateY(-5px);
+        }
+
+        .ebook-cover {
+            height: 250px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .ebook-cover.has-image {
+            padding: 0;
+            background: none;
+        }
+
+        .ebook-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--cor-destaque);
+            color: #fff;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        .ebook-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ebook-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-family: var(--fonte-titulo);
+        }
+
+        .ebook-desc {
+            font-size: 0.9rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .ebook-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--cor-destaque);
+            margin-bottom: 20px;
+        }
+
+        .btn-buy {
+            display: block;
+            text-align: center;
+            background: var(--cor-texto);
+            color: #fff;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: var(--cor-destaque);
+        }
+
+        /* --- INSTAGRAM / CONTATO --- */
+        .social-strip {
+            padding: 40px 0;
+            background: var(--cor-destaque);
+            text-align: center;
+            color: #fff;
+        }
+
+        .social-strip a {
+            color: #fff;
+            font-size: 2rem;
+            margin: 0 15px;
+        }
+
+        .social-strip a:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            background: #111;
+            color: #777;
+            padding: 60px 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--fonte-titulo);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-logo span {
+            color: var(--cor-destaque);
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 900px) {
+            .sobre-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sobre-img-container {
+                margin-bottom: 40px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            /* Simplificado para demo, em prod usar JS hamburger */
+            .hamburger {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        /* WHATSAPP FLOAT */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #20ba5a;
+            transform: scale(1.1);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'img/dt-logo.png' %}" alt="DT"
+                    style="height: 40px; margin-right: 10px; vertical-align: middle;">
+                Dilvania<span>Teixeira</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links nav-menu">
+                    <li><a href="{% url 'home' %}#sobre">Sobre</a></li>
+                    <li><a href="{% url 'home' %}#servicos">Consultoria</a></li>
+                    <li><a href="{% url 'home' %}#ebooks">E-books</a></li>
+                    <!-- LINK NOVO -->
+                    <li><a href="{% url 'home' %}#contato">Contato</a></li>
+                    <li class="theme-switch-wrapper">
+                        <label class="theme-switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </li>
+                </ul>
+                <div class="hamburger"><i class="fas fa-bars"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">Dilvania<span>Teixeira</span></div>
+            <p>&copy; 2026 Dilvania Teixeira. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle logic
+        const toggleSwitch = document.querySelector('#theme-toggle');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+
+        // Hamburger Menu (Simple toggle for mobile)
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+                navMenu.style.flexDirection = 'column';
+                navMenu.style.position = 'absolute';
+                navMenu.style.top = '70px';
+                navMenu.style.right = '0';
+                navMenu.style.background = 'var(--cor-fundo-secundario)';
+                navMenu.style.width = '100%';
+                navMenu.style.padding = '20px';
+                navMenu.style.borderBottom = '1px solid var(--cor-borda)';
+            }
+        });
+
+        // SCROLL REVEAL ANIMATION
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+                if (revealtop < windowheight - revealpoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        // Dispara uma vez ao carregar para mostrar o que já está na tela
+        reveal();
+    </script>
+
+    <!-- WHATSAPP BUTTON -->
+    <a href="https://wa.me/5511989996055" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+
+</html>

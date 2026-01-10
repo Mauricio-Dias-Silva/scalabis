@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <section class="hero-produto" style="padding: 40px 0; background: var(--cor-fundo);">
+        <div class="container">
+            <h1>Adicionar Novo <span>Produto</span></h1>
+            <p>Cadastre um novo ebook para venda.</p>
+        </div>
+    </section>
+
+    <section class="benefits" style="padding: 40px 0;">
+        <div class="container">
+            <div
+                style="max-width: 800px; margin: auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: var(--sombra-padrao);">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div style="margin-bottom: 20px;">
+                        <label for="{{ field.id_for_label }}"
+                            style="display: block; font-weight: 600; margin-bottom: 8px;">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <small style="color: #777; display: block; margin-top: 5px;">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% if field.errors %}
+                        <div style="color: red; margin-top: 5px;">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    <div style="text-align: center; margin-top: 40px;">
+                        <button type="submit" class="btn-checkout"
+                            style="border: none; cursor: pointer; animation: none;">
+                            Salvar Produto
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
+    .form-control:focus {
+        border-color: var(--cor-destaque);
+        outline: none;
+    }
+</style>
+{% endblock %}

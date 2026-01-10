@@ -1,23 +1,24 @@
-# Cloud Build para Site Estático (EscalaBis) - Rápido e Simples
-timeout: "600s" # 10 minutos (mais do que suficiente)
-
 steps:
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: "bash"
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/github.com/mauricio-dias-silva/scalabis:$COMMIT_SHA', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/github.com/mauricio-dias-silva/scalabis:$COMMIT_SHA']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
     args:
-      - "-c"
-      - |
-        set -e
-        # Implantar o contêiner (que usa o Nginx) no Cloud Run
-        gcloud run deploy "$_SERVICE_NAME" \
-          --source . \
-          --region "$_REGION" \
-          --platform managed \
-          --allow-unauthenticated \
-          --project "$_PROJECT_ID"
-        
-# Variáveis de substituição
-substitutions:
-  _SERVICE_NAME: "escalabis-site" 
-  _REGION: "us-east1"
-  _PROJECT_ID: "pythonjet" # Substitua pelo ID do projeto do cliente, se necessário
+    - 'run'
+    - 'deploy'
+    - 'scalabis'
+    - '--image'
+    - 'gcr.io/$PROJECT_ID/github.com/mauricio-dias-silva/scalabis:$COMMIT_SHA'
+    - '--region'
+    - 'us-central1'
+    - '--allow-unauthenticated'
+    - '--set-env-vars'
+    - 'DEBUG=False'
+
+images:
+- 'gcr.io/$PROJECT_ID/github.com/mauricio-dias-silva/scalabis:$COMMIT_SHA'
