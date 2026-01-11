@@ -196,19 +196,31 @@
                 {% endif %}
 
                 <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #1a1a1a; font-weight: 800; line-height: 1.2;">
-                    {{ site_settings.bonus_title|safe|default:'O "Pulo do Gato" que Faltava na Sua Gestão' }}
+                    {% if site_settings.bonus_title %}
+                    {{ site_settings.bonus_title|safe }}
+                    {% else %}
+                    O "Pulo do Gato" que Faltava na Sua Gestão
+                    {% endif %}
                 </h2>
 
                 <div style="font-size: 1.2rem; color: #555; max-width: 700px; margin: 0 auto 40px; line-height: 1.8;">
-                    {{ site_settings.bonus_subtitle|linebreaks|default:'Eu preparei algo que você não encontra em lugar
-                    nenhum. Não é apenas uma planilha, é o Mapa do Tesouro da sua liberdade financeira.' }}
+                    {% if site_settings.bonus_subtitle %}
+                    {{ site_settings.bonus_subtitle|linebreaks }}
+                    {% else %}
+                    Eu preparei algo que você não encontra em lugar nenhum. Não é apenas uma planilha, é o Mapa do
+                    Tesouro da sua liberdade financeira.
+                    {% endif %}
                 </div>
 
                 <a href="{% if site_settings.bonus_spreadsheet %}{{ site_settings.bonus_spreadsheet.url }}{% else %}{% static 'docs/planilha_financeira_exclusiva.csv' %}{% endif %}"
                     download class="btn-checkout-lg"
                     style="display: inline-block; width: auto; padding: 20px 60px; font-size: 1.1rem; box-shadow: 0 10px 30px rgba(197, 160, 89, 0.4);">
-                    <i class="fas fa-download" style="margin-right: 15px;"></i> {{
-                    site_settings.bonus_button_text|default:'BAIXAR "O MAPA DO TESOURO"' }}
+                    <i class="fas fa-download" style="margin-right: 15px;"></i>
+                    {% if site_settings.bonus_button_text %}
+                    {{ site_settings.bonus_button_text }}
+                    {% else %}
+                    BAIXAR "O MAPA DO TESOURO"
+                    {% endif %}
                 </a>
 
                 <p
