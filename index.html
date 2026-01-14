@@ -626,9 +626,9 @@
                 <h1 class="reveal active">Estratégia e Liderança <br><span>Para Negócios Reais</span></h1>
                 <p class="reveal active" style="transition-delay: 0.2s;">Transformo empresários em líderes de alta
                     performance através de consultoria estratégica e inteligência financeira.</p>
-                <!-- BOTÃO CORRIGIDO: Garantindo cor e visibilidade -->
+                <!-- BOTÃO CORRIGIDO: Removido !important conflitante e ajustado CSS -->
                 <a href="#ebooks" class="btn-gold reveal active"
-                    style="transition-delay: 0.4s; color: #ffffff !important; display: inline-block; text-align: center;">Conheça
+                    style="transition-delay: 0.4s; display: inline-block; text-align: center;">Conheça
                     Meus Materiais</a>
             </div>
         </section>
@@ -823,25 +823,7 @@
 
         toggleSwitch.addEventListener('change', switchTheme, false);
 
-        // Hamburger Menu (Simple toggle for mobile)
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
 
-        hamburger.addEventListener('click', () => {
-            if (navMenu.style.display === 'flex') {
-                navMenu.style.display = 'none';
-            } else {
-                navMenu.style.display = 'flex';
-                navMenu.style.flexDirection = 'column';
-                navMenu.style.position = 'absolute';
-                navMenu.style.top = '70px';
-                navMenu.style.right = '0';
-                navMenu.style.background = 'var(--cor-fundo-secundario)';
-                navMenu.style.width = '100%';
-                navMenu.style.padding = '20px';
-                navMenu.style.borderBottom = '1px solid var(--cor-borda)';
-            }
-        });
 
         // SCROLL REVEAL ANIMATION
         window.addEventListener('scroll', reveal);
