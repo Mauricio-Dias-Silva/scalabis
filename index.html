@@ -560,17 +560,39 @@
                 display: none;
             }
 
-            /* Simplificado para demo, em prod usar JS hamburger */
-            .hamburger {
-                display: block;
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-        }
+            /* --- NAVBAR RESPONSIVA --- */
+            @media (max-width: 900px) {
+                .nav-menu {
+                    position: fixed;
+                    top: 70px;
+                    left: -100%;
+                    flex-direction: column;
+                    background-color: var(--cor-fundo-secundario);
+                    width: 100%;
+                    text-align: center;
+                    transition: 0.3s;
+                    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                    padding: 20px 0;
+                }
 
-        .hamburger {
-            display: none;
-        }
+                .nav-menu.active {
+                    left: 0;
+                }
+
+                .nav-menu li {
+                    margin: 20px 0;
+                }
+
+                .hamburger {
+                    display: block;
+                    font-size: 1.8rem;
+                    cursor: pointer;
+                }
+            }
+
+            .hamburger {
+                display: none;
+            }
     </style>
 </head>
 
@@ -581,11 +603,12 @@
             <a href="#" class="logo">Dilvania<span>Teixeira</span></a>
 
             <nav>
+                <div class="hamburger"><i class="fas fa-bars"></i></div>
                 <ul class="nav-links nav-menu">
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#servicos">Consultoria</a></li>
-                    <li><a href="#ebooks">E-books</a></li> <!-- LINK NOVO -->
-                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="#sobre" onclick="closeMenu()">Sobre</a></li>
+                    <li><a href="#servicos" onclick="closeMenu()">Consultoria</a></li>
+                    <li><a href="#ebooks" onclick="closeMenu()">E-books</a></li>
+                    <li><a href="#contato" onclick="closeMenu()">Contato</a></li>
                     <li class="theme-switch-wrapper">
                         <label class="theme-switch">
                             <input type="checkbox" id="theme-toggle">
@@ -593,7 +616,6 @@
                         </label>
                     </li>
                 </ul>
-                <div class="hamburger"><i class="fas fa-bars"></i></div>
             </nav>
         </div>
     </header>
@@ -601,12 +623,36 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1>Estratégia e Liderança <br><span>Para Negócios Reais</span></h1>
-                <p>Transformo empresários em líderes de alta performance através de consultoria estratégica e
-                    inteligência financeira.</p>
-                <a href="#ebooks" class="btn-gold">Conheça Meus Materiais</a>
+                <h1 class="reveal active">Estratégia e Liderança <br><span>Para Negócios Reais</span></h1>
+                <p class="reveal active" style="transition-delay: 0.2s;">Transformo empresários em líderes de alta
+                    performance através de consultoria estratégica e inteligência financeira.</p>
+                <!-- BOTÃO CORRIGIDO: Garantindo cor e visibilidade -->
+                <a href="#ebooks" class="btn-gold reveal active"
+                    style="transition-delay: 0.4s; color: #ffffff !important; display: inline-block; text-align: center;">Conheça
+                    Meus Materiais</a>
             </div>
         </section>
+
+        <!-- ... (Resto do conteúdo mantido, focando nas melhorias de JS abaixo) ... -->
+
+        <script>
+            // Mobile Menu Logic
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-menu");
+
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
+
+            function closeMenu() {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }
+
+            // ... (Rest of JS)
+        </script>
+
 
         <section id="sobre">
             <div class="container">
