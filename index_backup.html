@@ -821,12 +821,13 @@
             }
         }
 
-        toggleSwitch.addEventListener('change', switchTheme, false);
-
-
+        if (toggleSwitch) {
+            toggleSwitch.addEventListener('change', switchTheme, false);
+        }
 
         // SCROLL REVEAL ANIMATION
         window.addEventListener('scroll', reveal);
+
         function reveal() {
             var reveals = document.querySelectorAll('.reveal');
             for (var i = 0; i < reveals.length; i++) {
@@ -838,6 +839,7 @@
                 }
             }
         }
+
         // Dispara uma vez ao carregar para mostrar o que já está na tela
         reveal();
     </script>
