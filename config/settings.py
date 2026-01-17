@@ -29,6 +29,13 @@ DEBUG = True # os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
+# Fixar CSRF para Cloud Run e domínios personalizados
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.run.app',  # Cloud Run
+    'https://dilvaniateixeira.com.br',
+    'https://www.dilvaniateixeira.com.br',
+]
+
 
 # Application definition
 
