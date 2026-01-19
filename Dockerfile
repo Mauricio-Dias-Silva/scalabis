@@ -19,4 +19,4 @@ COPY . /app/
 RUN python manage.py collectstatic --noinput
 
 # Run Migrations and Start Gunicorn
-CMD sh -c "python manage.py migrate && exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
+CMD sh -c "python manage.py migrate && python create_superuser_script.py && exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
