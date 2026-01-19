@@ -8,11 +8,22 @@ django.setup()
 from core.models import SiteSettings, Service
 
 # 1. Site Settings
-settings, created = SiteSettings.objects.get_or_create(id=1)
+settings, created = SiteSettings.objects.get_or_create(
+    id=1,
+    defaults={
+        'hero_title': 'Estratégia e Liderança\\nPara Negócios Reais',
+        'hero_subtitle': 'Transformo empresários em líderes de alta performance através de consultoria estratégica e inteligência financeira.',
+        'hero_button_text': 'Conheça Nossos Materiais',
+        'about_title': 'Olá, sou Dilvania Teixeira',
+        'about_description': 'Especialista em Educação Financeira e Gestão Empresarial.',
+        'contact_phone': '(11) 98267-5531',
+        'contact_email': 'dilvania.teixeira@dsop.com.br',
+    }
+)
 if created:
-    print("Created Default Site Settings")
+    print("✅ Created Default Site Settings")
 else:
-    print("Site Settings already exist")
+    print("ℹ️ Site Settings already exist")
 
 # 2. Services
 services_data = [

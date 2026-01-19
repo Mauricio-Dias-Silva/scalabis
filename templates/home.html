@@ -64,6 +64,29 @@
             <div class="calculator-wrapper"
                 style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; max-width: 800px; margin: 0 auto;">
                 <div class="calc-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                    <style>
+                        @media (max-width: 768px) {
+                            .calc-grid {
+                                grid-template-columns: 1fr !important;
+                                gap: 30px !important;
+                            }
+
+                            .calc-results {
+                                border-left: none !important;
+                                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                                padding-left: 0 !important;
+                                padding-top: 30px !important;
+                            }
+
+                            #total-val {
+                                font-size: 2.5rem !important;
+                            }
+
+                            .calculator-wrapper {
+                                padding: 30px 20px !important;
+                            }
+                        }
+                    </style>
                     <!-- Inputs -->
                     <div class="calc-inputs">
                         <div style="margin-bottom: 25px;">
