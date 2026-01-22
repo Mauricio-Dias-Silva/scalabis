@@ -580,22 +580,30 @@
 
                 <script>
                     function sendEmail() {
+                        // Função renomeada para manter compatibilidade com onsubmit antigo, 
+                        // mas agora envia para WhatsApp!
                         var name = document.getElementById('id_name').value;
                         var email = document.getElementById('id_email').value;
                         var phone = document.getElementById('id_phone').value;
                         var message = document.getElementById('id_message').value;
 
-                        var subject = "Contato via Site - " + name;
-                        var body = "Nome: " + name + "\n" +
-                            "Email: " + email + "\n" +
-                            "WhatsApp: " + phone + "\n\n" +
-                            "Mensagem:\n" + message;
+                        // Validação básica
+                        if (!name || !phone) {
+                            alert("Por favor, preencha pelo menos Nome e WhatsApp.");
+                            return;
+                        }
 
-                        var mailtoLink = "mailto:dilvania.teixeira@dsop.com.br" +
-                            "?subject=" + encodeURIComponent(subject) +
-                            "&body=" + encodeURIComponent(body);
+                        var text = "*Novo Lead do Site (Scalabis)*\n\n" +
+                            "👤 *Nome:* " + name + "\n" +
+                            "📧 *Email:* " + email + "\n" +
+                            "📱 *Whats:* " + phone + "\n\n" +
+                            "💬 *Mensagem:* \n" + message;
 
-                        window.location.href = mailtoLink;
+                        var encodedText = encodeURIComponent(text);
+                        // Link universal que abre App no mobile ou Web no desktop
+                        var waLink = "https://wa.me/5511989996055?text=" + encodedText;
+
+                        window.open(waLink, '_blank');
                     }
                 </script>
 
