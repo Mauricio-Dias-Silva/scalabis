@@ -50,6 +50,12 @@ class Lead(models.Model):
     phone = models.CharField("Telefone/WhatsApp", max_length=20, blank=True)
     message = models.TextField("Mensagem", blank=True)
     status = models.CharField("Status", max_length=20, choices=STATUS_CHOICES, default='NEW')
+    
+    # Inteligência Financeira (Capturado do Calculadora)
+    company_revenue = models.DecimalField("Faturamento Declarado", max_digits=12, decimal_places=2, null=True, blank=True)
+    company_profit = models.DecimalField("Lucro Real Calculado", max_digits=12, decimal_places=2, null=True, blank=True)
+    health_status = models.CharField("Saúde Financeira", max_length=20, blank=True, help_text="Diagnóstico automático do site")
+    
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import Product, SiteSettings, Service
 from .forms import LeadForm, ProductForm
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+import json
+import decimal
 
 def home(request):
     if request.method == 'POST':
@@ -49,3 +53,27 @@ def add_product(request):
         form = ProductForm()
     
     return render(request, 'add_product.html', {'form': form})
+@require_POST
+def api_save_lead(request):
+    try:
+        data = json.loads(request.body)
+        name = data.get('name')
+        phone = data.get('phone')
+        email = data.get('email', '')
+        revenue = data.get('revenue', 0)
+        profit = data.get('profit', 0)
+        health = data.get('health', '')
+
+        lead = Lead.objects.create(
+            name=name,
+            phone=phone,
+            email=email,
+            company_revenue=decimal.Decimal(str(revenue)),
+            company_profit=decimal.Decimal(str(profit)),
+            health_status=health,
+            message=f"Capturado via Termômetro da Riqueza. Status: {health}"
+        )
+
+        return JsonResponse({'success': True, 'lead_id': lead.id})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=400)

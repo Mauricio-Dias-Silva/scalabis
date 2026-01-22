@@ -205,6 +205,41 @@
                             font-size: 2.2rem;
                         }
                     }
+
+                    /* Lead Modal Styles */
+                    .lead-modal {
+                        display: none;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.85);
+                        z-index: 9999;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 20px;
+                    }
+
+                    .lead-modal-content {
+                        background: #1a1a1a;
+                        padding: 40px;
+                        border-radius: 20px;
+                        border: 1px solid #c5a059;
+                        max-width: 500px;
+                        width: 100%;
+                        position: relative;
+                        box-shadow: 0 0 50px rgba(197, 160, 89, 0.2);
+                    }
+
+                    .lead-modal-close {
+                        position: absolute;
+                        top: 15px;
+                        right: 20px;
+                        color: #fff;
+                        font-size: 24px;
+                        cursor: pointer;
+                    }
                 </style>
 
                 <div class="calc-grid">
@@ -241,10 +276,34 @@
                             escravo dela.
                         </p>
 
-                        <a href="#contato" class="btn-gold"
+                        <a href="javascript:void(0)" onclick="openLeadModal()" class="btn-gold"
                             style="padding: 10px 25px; font-size: 0.9rem; text-decoration: none; display: inline-block;">
                             QUERO CORRIGIR ISSO
                         </a>
+                    </div>
+                </div>
+
+                <!-- Lead Modal -->
+                <div id="leadModal" class="lead-modal">
+                    <div class="lead-modal-content">
+                        <span class="lead-modal-close" onclick="closeLeadModal()">&times;</span>
+                        <h3 style="color:#c5a059; margin-bottom: 20px; text-align: center;">Receba seu Diagnóstico</h3>
+                        <p style="text-align: center; margin-bottom: 25px; opacity: 0.8;">Informe seus dados para salvar
+                            sua análise e falar com um especialista.</p>
+
+                        <div class="calc-input-group">
+                            <label class="calc-label">Seu Nome</label>
+                            <input type="text" id="lead_name" class="calc-input" placeholder="Ex: João Silva">
+                        </div>
+                        <div class="calc-input-group">
+                            <label class="calc-label">WhatsApp</label>
+                            <input type="text" id="lead_phone" class="calc-input" placeholder="Ex: (11) 99999-9999">
+                        </div>
+
+                        <button onclick="saveLeadAndGo()" id="btn-save-lead" class="btn-gold"
+                            style="width: 100%; padding: 15px; margin-top: 10px; cursor: pointer; border: none;">
+                            SALVAR E FALAR NO WHATSAPP
+                        </button>
                     </div>
                 </div>
 
@@ -290,6 +349,78 @@
                             profitEl.style.color = '#2ecc71';
                             textEl.innerHTML = `Parabéns! Sua margem real é de <strong>${margemReal.toFixed(1)}%</strong>. Agora é hora de escalar e multiplicar esse capital.`;
                             boxEl.style.borderColor = '#2ecc71';
+                        }
+                    }
+
+                    let lastCalcData = { revenue: 0, profit: 0, health: '' };
+
+                    function openLeadModal() {
+                        const faturamento = parseFloat(document.getElementById('faturamento').value) || 0;
+                        if (faturamento === 0) {
+                            alert("Por favor, preencha o faturamento primeiro!");
+                            return;
+                        }
+
+                        // Captura dados atuais do cálculo
+                        const custos = parseFloat(document.getElementById('custos').value) || 0;
+                        const retirada = parseFloat(document.getElementById('retirada').value) || 0;
+                        const lucroReal = (faturamento - custos) - retirada;
+                        const badgeText = document.getElementById('health-badge').innerText;
+
+                        lastCalcData = {
+                            revenue: faturamento,
+                            profit: lucroReal,
+                            health: badgeText
+                        };
+
+                        document.getElementById('leadModal').style.display = 'flex';
+                    }
+
+                    function closeLeadModal() {
+                        document.getElementById('leadModal').style.display = 'none';
+                    }
+
+                    async function saveLeadAndGo() {
+                        const name = document.getElementById('lead_name').value;
+                        const phone = document.getElementById('lead_phone').value;
+                        const btn = document.getElementById('btn-save-lead');
+
+                        if (!name || !phone) {
+                            alert("Por favor, preencha seu nome e WhatsApp.");
+                            return;
+                        }
+
+                        btn.innerText = "Sincronizando...";
+                        btn.disabled = true;
+
+                        try {
+                            const response = await fetch('/api/save-lead/', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': '{{ csrf_token }}'
+                                },
+                                body: JSON.stringify({
+                                    name: name,
+                                    phone: phone,
+                                    revenue: lastCalcData.revenue,
+                                    profit: lastCalcData.profit,
+                                    health: lastCalcData.health
+                                })
+                            });
+
+                            const result = await response.json();
+
+                            const msg = encodeURIComponent(`Olá Dilvania! Acabei de fazer o teste do Termômetro da Riqueza no seu site.\n\nMeu Resultado: ${lastCalcData.health}\nMeu Lucro Real: R$ ${lastCalcData.profit.toLocaleString('pt-BR')}\n\nGostaria de entender como podemos melhorar isso.`);
+                            window.open(`https://wa.me/5511982675531?text=${msg}`, '_blank');
+                            closeLeadModal();
+
+                        } catch (e) {
+                            console.error(e);
+                            window.open(`https://wa.me/5511982675531?text=Olá Dilvania! Vi seu site e gostaria de falar sobre gestão financeira.`, '_blank');
+                        } finally {
+                            btn.innerText = "SALVAR E FALAR NO WHATSAPP";
+                            btn.disabled = false;
                         }
                     }
                 </script>
