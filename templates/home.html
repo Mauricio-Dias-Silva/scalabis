@@ -9,7 +9,7 @@
             <p>{{ site_settings.hero_subtitle }}</p>
             <a href="#ebooks" class="btn-gold reveal active"
                 style="transition-delay: 0.4s; color: #ffffff !important; display: inline-block; text-align: center; z-index: 10; position: relative; opacity: 1 !important;">{{
-                site_settings.hero_button_text }}</a>
+                site_settings.hero_button_text|default:"SAIBA MAIS" }}</a>
         </div>
     </section>
 
@@ -51,89 +51,183 @@
 
     <!-- SIMULADOR DE PROSPERIDADE (SURPRISE INGREDIENT) -->
     <section id="simulador"
-        style="background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%); color: #fff; padding: 80px 0;">
+        style="background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%); color: #fff; padding: 60px 0;">
         <div class="container">
-            <h2 class="reveal" style="text-align: center; color: #fff; margin-bottom: 10px;">Simulador de
+            <h2 class="reveal" style="text-align: center; color: #fff; margin-bottom: 10px; font-size: 2.5rem;">
+                Simulador de
                 <span>Prosperidade</span>
             </h2>
-            <p style="text-align: center; max-width: 600px; margin: 0 auto 50px; opacity: 0.8;">
-                Descubra o poder dos juros compostos. Veja quanto você pode acumular investindo com consistência e
-                inteligência.
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; opacity: 0.8; padding: 0 15px;">
+                Descubra o poder dos juros compostos. Veja quanto você pode acumular investindo com consistência.
             </p>
 
-            <div class="calculator-wrapper"
-                style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; max-width: 800px; margin: 0 auto;">
-                <div class="calc-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div class="calculator-wrapper">
+                <div class="calc-grid">
                     <style>
+                        .calculator-wrapper {
+                            background: rgba(255, 255, 255, 0.05);
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            border-radius: 20px;
+                            padding: 40px;
+                            max-width: 900px;
+                            margin: 0 auto;
+                        }
+
+                        .calc-grid {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 40px;
+                            align-items: center;
+                        }
+
+                        .calc-input-group {
+                            margin-bottom: 20px;
+                        }
+
+                        .calc-label {
+                            display: block;
+                            margin-bottom: 8px;
+                            font-weight: 600;
+                            color: #c5a059;
+                            font-size: 0.95rem;
+                            text-align: left;
+                        }
+
+                        .calc-input {
+                            width: 100%;
+                            padding: 15px;
+                            border-radius: 8px;
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            background: rgba(0, 0, 0, 0.2);
+                            color: #fff;
+                            font-size: 1.1rem;
+                            box-sizing: border-box;
+                            /* Critical for responsiveness */
+                            transition: border-color 0.3s;
+                        }
+
+                        .calc-input:focus {
+                            border-color: #c5a059;
+                            outline: none;
+                        }
+
+                        .btn-calc {
+                            width: 100%;
+                            padding: 16px;
+                            background: #c5a059;
+                            border: none;
+                            border-radius: 50px;
+                            color: #fff;
+                            font-weight: 700;
+                            cursor: pointer;
+                            font-size: 1.1rem;
+                            transition: 0.3s;
+                            margin-top: 15px;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                        }
+
+                        .btn-calc:hover {
+                            background: #d4af6a;
+                            transform: translateY(-2px);
+                            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+                        }
+
+                        .calc-results {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            border-left: 1px solid rgba(255, 255, 255, 0.1);
+                            padding-left: 40px;
+                            height: 100%;
+                        }
+
+                        #total-val {
+                            font-size: 3.5rem;
+                            font-weight: 800;
+                            color: #c5a059;
+                            line-height: 1.1;
+                            margin-bottom: 15px;
+                            word-break: break-all;
+                            /* Prevent overflow on small screens */
+                        }
+
+                        .result-item {
+                            font-size: 1rem;
+                            margin-bottom: 8px;
+                            display: block;
+                        }
+
+                        /* RESPONSIVE CSS */
                         @media (max-width: 768px) {
+                            .calculator-wrapper {
+                                padding: 25px 20px;
+                                margin: 0 10px;
+                            }
+
                             .calc-grid {
-                                grid-template-columns: 1fr !important;
-                                gap: 30px !important;
+                                grid-template-columns: 1fr;
+                                gap: 30px;
                             }
 
                             .calc-results {
-                                border-left: none !important;
-                                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-                                padding-left: 0 !important;
-                                padding-top: 30px !important;
+                                border-left: none;
+                                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                                padding-left: 0;
+                                padding-top: 30px;
+                                margin-top: 10px;
                             }
 
                             #total-val {
-                                font-size: 2.5rem !important;
+                                font-size: 2.2rem;
                             }
 
-                            .calculator-wrapper {
-                                padding: 30px 20px !important;
+                            .btn-calc {
+                                font-size: 1rem;
                             }
                         }
                     </style>
+
                     <!-- Inputs -->
                     <div class="calc-inputs">
-                        <div style="margin-bottom: 25px;">
-                            <label
-                                style="display: block; margin-bottom: 10px; font-weight: 600; color: #c5a059;">Investimento
-                                Inicial (R$)</label>
-                            <input type="number" id="initial" value="0"
-                                style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem;">
+                        <div class="calc-input-group">
+                            <label class="calc-label">Investimento Inicial (R$)</label>
+                            <input type="number" id="initial" value="0" class="calc-input" placeholder="0,00">
                         </div>
-                        <div style="margin-bottom: 25px;">
-                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #c5a059;">Aporte
-                                Mensal (R$)</label>
-                            <input type="number" id="monthly" value="500"
-                                style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 1.1rem;">
+                        <div class="calc-input-group">
+                            <label class="calc-label">Aporte Mensal (R$)</label>
+                            <input type="number" id="monthly" value="500" class="calc-input" placeholder="500,00">
                         </div>
-                        <div style="margin-bottom: 25px;">
-                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #c5a059;">Tempo
-                                (Anos)</label>
+                        <div class="calc-input-group">
+                            <label class="calc-label">Tempo (Anos): <span id="years-display"
+                                    style="color: #fff;">10</span></label>
                             <input type="range" id="years" min="1" max="30" value="10"
-                                style="width: 100%; cursor: pointer; accent-color: #c5a059;"
-                                oninput="document.getElementById('years-val').innerText = this.value + ' anos'">
-                            <div id="years-val" style="text-align: right; margin-top: 5px; font-weight: bold;">10 anos
-                            </div>
+                                style="width: 100%; cursor: pointer; accent-color: #c5a059; margin-top: 10px;"
+                                oninput="document.getElementById('years-display').innerText = this.value">
                         </div>
-                        <button onclick="calculateWealth()"
-                            style="width: 100%; padding: 15px; background: #c5a059; border: none; border-radius: 50px; color: #fff; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: 0.3s; margin-top: 10px;">
-                            SIMULAR MEU FUTURO
+                        <button onclick="calculateWealth()" class="btn-calc">
+                            Simular Futuro
                         </button>
                     </div>
 
                     <!-- Results -->
-                    <div class="calc-results"
-                        style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px;">
-                        <p style="font-size: 1.2rem; margin-bottom: 10px; opacity: 0.8;">Em <span
+                    <div class="calc-results">
+                        <p style="font-size: 1.1rem; margin-bottom: 10px; opacity: 0.8;">Em <span
                                 id="res-years">10</span> anos você terá:</p>
-                        <div id="total-val"
-                            style="font-size: 3.5rem; font-weight: 800; color: #c5a059; line-height: 1.1; margin-bottom: 20px;">
-                            R$ 0,00
-                        </div>
-                        <div style="font-size: 0.9rem; margin-bottom: 30px;">
-                            <span style="display: block; margin-bottom: 5px;">Total Investido: <strong id="invested-val"
-                                    style="color: #fff;">R$ 0,00</strong></span>
-                            <span style="display: block;">Juros ganhos: <strong id="interest-val"
+                        <div id="total-val">R$ 0,00</div>
+
+                        <div
+                            style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; width: 100%; box-sizing: border-box;">
+                            <span class="result-item">Total Investido: <strong id="invested-val" style="color: #fff;">R$
+                                    0,00</strong></span>
+                            <span class="result-item" style="margin-bottom: 0;">Juros ganhos: <strong id="interest-val"
                                     style="color: #25d366;">R$ 0,00</strong></span>
                         </div>
-                        <p style="font-size: 0.9rem; opacity: 0.7; font-style: italic;">Considerando taxa média de 10%
-                            a.a.</p>
+
+                        <p style="font-size: 0.8rem; opacity: 0.6; font-style: italic; margin-top: 15px;">Considerando
+                            taxa média de 10% a.a.</p>
                     </div>
                 </div>
             </div>
@@ -170,6 +264,7 @@
 
     <!-- Mobile Responsive Styles for Bonus Section -->
     <style>
+        /* Specific Fixes for Bonus Section Responsiveness */
         @media (max-width: 768px) {
             #bonus .container>div {
                 padding: 40px 20px !important;
@@ -177,28 +272,25 @@
             }
 
             #bonus h2 {
-                font-size: 1.8rem !important;
-            }
-
-            #bonus img.scale-loop {
-                max-height: 80px !important;
+                font-size: 1.6rem !important;
+                /* Smaller title on mobile */
             }
 
             #bonus .btn-checkout-lg {
-                padding: 15px 30px !important;
+                padding: 15px 20px !important;
                 font-size: 1rem !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
+                width: 100%;
             }
 
-            #bonus .ribbon {
-                top: 20px !important;
-                right: -40px !important;
+            .ribbon {
+                top: 15px !important;
+                right: -45px !important;
+                padding: 5px 60px !important;
                 font-size: 0.7rem !important;
-                padding: 5px 80px !important;
             }
         }
     </style>
+
 
     <!-- EXCLUSIVE BONUS SECTION -->
     <section id="bonus"
