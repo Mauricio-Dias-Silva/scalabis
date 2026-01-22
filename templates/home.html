@@ -49,216 +49,251 @@
         </div>
     </section>
 
-    <!-- SIMULADOR DE PROSPERIDADE (SURPRISE INGREDIENT) -->
+    <!-- TERMÔMETRO DA RIQUEZA (LUCRO REAL VS ILUSÃO) -->
     <section id="simulador"
         style="background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%); color: #fff; padding: 60px 0;">
         <div class="container">
             <h2 class="reveal" style="text-align: center; color: #fff; margin-bottom: 10px; font-size: 2.5rem;">
-                Simulador de
-                <span>Prosperidade</span>
+                Termômetro da
+                <span>Riqueza</span>
             </h2>
             <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; opacity: 0.8; padding: 0 15px;">
-                Descubra o poder dos juros compostos. Veja quanto você pode acumular investindo com consistência.
+                Muitos empresários acham que têm lucro, mas estão apenas girando dinheiro. Descubra a verdade sobre sua
+                empresa agora.
             </p>
 
             <div class="calculator-wrapper">
-                <div class="calc-grid">
-                    <style>
+                <style>
+                    .calculator-wrapper {
+                        background: rgba(255, 255, 255, 0.05);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        border-radius: 20px;
+                        padding: 40px;
+                        max-width: 900px;
+                        margin: 0 auto;
+                        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+                    }
+
+                    .calc-grid {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 40px;
+                        align-items: center;
+                    }
+
+                    .calc-input-group {
+                        margin-bottom: 20px;
+                        position: relative;
+                    }
+
+                    .calc-label {
+                        display: block;
+                        margin-bottom: 8px;
+                        font-weight: 600;
+                        color: #c5a059;
+                        font-size: 0.9rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                    }
+
+                    .calc-input {
+                        width: 100%;
+                        padding: 15px;
+                        border-radius: 8px;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        background: rgba(0, 0, 0, 0.4);
+                        color: #fff;
+                        font-size: 1.1rem;
+                        box-sizing: border-box;
+                        transition: all 0.3s;
+                    }
+
+                    .calc-input:focus {
+                        border-color: #c5a059;
+                        background: rgba(0, 0, 0, 0.6);
+                        outline: none;
+                        box-shadow: 0 0 15px rgba(197, 160, 89, 0.2);
+                    }
+
+                    .btn-calc {
+                        width: 100%;
+                        padding: 18px;
+                        background: linear-gradient(135deg, #c5a059 0%, #a67c00 100%);
+                        border: none;
+                        border-radius: 50px;
+                        color: #fff;
+                        font-weight: 800;
+                        cursor: pointer;
+                        font-size: 1.1rem;
+                        transition: 0.3s;
+                        margin-top: 10px;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+                    }
+
+                    .btn-calc:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 15px 30px rgba(197, 160, 89, 0.5);
+                    }
+
+                    .calc-results {
+                        background: rgba(255, 255, 255, 0.05);
+                        border-radius: 15px;
+                        padding: 30px;
+                        text-align: center;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        transition: all 0.5s ease;
+                    }
+
+                    .health-badge {
+                        display: inline-block;
+                        padding: 8px 20px;
+                        border-radius: 20px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        font-size: 0.9rem;
+                        margin-bottom: 20px;
+                        transition: all 0.5s;
+                    }
+
+                    .badge-danger {
+                        background: rgba(231, 76, 60, 0.2);
+                        color: #e74c3c;
+                        border: 1px solid #e74c3c;
+                    }
+
+                    .badge-warning {
+                        background: rgba(243, 156, 18, 0.2);
+                        color: #f39c12;
+                        border: 1px solid #f39c12;
+                    }
+
+                    .badge-success {
+                        background: rgba(46, 204, 113, 0.2);
+                        color: #2ecc71;
+                        border: 1px solid #2ecc71;
+                    }
+
+                    .result-value {
+                        font-size: 3rem;
+                        font-weight: 800;
+                        margin: 10px 0;
+                        transition: color 0.5s;
+                    }
+
+                    .result-desc {
+                        font-size: 1rem;
+                        opacity: 0.8;
+                        margin-bottom: 20px;
+                        line-height: 1.5;
+                    }
+
+                    /* RESPONSIVE CSS */
+                    @media (max-width: 768px) {
                         .calculator-wrapper {
-                            background: rgba(255, 255, 255, 0.05);
-                            border: 1px solid rgba(255, 255, 255, 0.1);
-                            border-radius: 20px;
-                            padding: 40px;
-                            max-width: 900px;
-                            margin: 0 auto;
+                            padding: 25px 20px;
+                            margin: 0 10px;
                         }
 
                         .calc-grid {
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            gap: 40px;
-                            align-items: center;
+                            grid-template-columns: 1fr;
+                            gap: 30px;
                         }
 
-                        .calc-input-group {
-                            margin-bottom: 20px;
+                        .result-value {
+                            font-size: 2.2rem;
                         }
+                    }
+                </style>
 
-                        .calc-label {
-                            display: block;
-                            margin-bottom: 8px;
-                            font-weight: 600;
-                            color: #c5a059;
-                            font-size: 0.95rem;
-                            text-align: left;
-                        }
-
-                        .calc-input {
-                            width: 100%;
-                            padding: 15px;
-                            border-radius: 8px;
-                            border: 1px solid rgba(255, 255, 255, 0.1);
-                            background: rgba(0, 0, 0, 0.2);
-                            color: #fff;
-                            font-size: 1.1rem;
-                            box-sizing: border-box;
-                            /* Critical for responsiveness */
-                            transition: border-color 0.3s;
-                        }
-
-                        .calc-input:focus {
-                            border-color: #c5a059;
-                            outline: none;
-                        }
-
-                        .btn-calc {
-                            width: 100%;
-                            padding: 16px;
-                            background: #c5a059;
-                            border: none;
-                            border-radius: 50px;
-                            color: #fff;
-                            font-weight: 700;
-                            cursor: pointer;
-                            font-size: 1.1rem;
-                            transition: 0.3s;
-                            margin-top: 15px;
-                            text-transform: uppercase;
-                            letter-spacing: 1px;
-                        }
-
-                        .btn-calc:hover {
-                            background: #d4af6a;
-                            transform: translateY(-2px);
-                            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
-                        }
-
-                        .calc-results {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            align-items: center;
-                            text-align: center;
-                            border-left: 1px solid rgba(255, 255, 255, 0.1);
-                            padding-left: 40px;
-                            height: 100%;
-                        }
-
-                        #total-val {
-                            font-size: 3.5rem;
-                            font-weight: 800;
-                            color: #c5a059;
-                            line-height: 1.1;
-                            margin-bottom: 15px;
-                            word-break: break-all;
-                            /* Prevent overflow on small screens */
-                        }
-
-                        .result-item {
-                            font-size: 1rem;
-                            margin-bottom: 8px;
-                            display: block;
-                        }
-
-                        /* RESPONSIVE CSS */
-                        @media (max-width: 768px) {
-                            .calculator-wrapper {
-                                padding: 25px 20px;
-                                margin: 0 10px;
-                            }
-
-                            .calc-grid {
-                                grid-template-columns: 1fr;
-                                gap: 30px;
-                            }
-
-                            .calc-results {
-                                border-left: none;
-                                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                                padding-left: 0;
-                                padding-top: 30px;
-                                margin-top: 10px;
-                            }
-
-                            #total-val {
-                                font-size: 2.2rem;
-                            }
-
-                            .btn-calc {
-                                font-size: 1rem;
-                            }
-                        }
-                    </style>
-
+                <div class="calc-grid">
                     <!-- Inputs -->
                     <div class="calc-inputs">
                         <div class="calc-input-group">
-                            <label class="calc-label">Investimento Inicial (R$)</label>
-                            <input type="number" id="initial" value="0" class="calc-input" placeholder="0,00">
+                            <label class="calc-label">Faturamento Mensal (R$)</label>
+                            <input type="number" id="faturamento" class="calc-input" placeholder="Ex: 50000"
+                                oninput="calculateRealProfit()">
                         </div>
                         <div class="calc-input-group">
-                            <label class="calc-label">Aporte Mensal (R$)</label>
-                            <input type="number" id="monthly" value="500" class="calc-input" placeholder="500,00">
+                            <label class="calc-label">Custos Totais (Empresa)</label>
+                            <input type="number" id="custos" class="calc-input" placeholder="Ex: 35000"
+                                oninput="calculateRealProfit()">
                         </div>
                         <div class="calc-input-group">
-                            <label class="calc-label">Tempo (Anos): <span id="years-display"
-                                    style="color: #fff;">10</span></label>
-                            <input type="range" id="years" min="1" max="30" value="10"
-                                style="width: 100%; cursor: pointer; accent-color: #c5a059; margin-top: 10px;"
-                                oninput="document.getElementById('years-display').innerText = this.value">
+                            <label class="calc-label">Sua Retirada (Pró-Labore + Pessoais)</label>
+                            <input type="number" id="retirada" class="calc-input" placeholder="Ex: 10000"
+                                oninput="calculateRealProfit()">
+                            <small style="display: block; margin-top: 5px; opacity: 0.6; font-size: 0.8rem;">(Inclua
+                                escola, mercado, cartão pessoal pago pela empresa)</small>
                         </div>
-                        <button onclick="calculateWealth()" class="btn-calc">
-                            Simular Futuro
-                        </button>
                     </div>
 
                     <!-- Results -->
-                    <div class="calc-results">
-                        <p style="font-size: 1.1rem; margin-bottom: 10px; opacity: 0.8;">Em <span
-                                id="res-years">10</span> anos você terá:</p>
-                        <div id="total-val">R$ 0,00</div>
+                    <div class="calc-results" id="result-box">
+                        <div id="health-badge" class="health-badge badge-warning">AGUARDANDO DADOS...</div>
 
-                        <div
-                            style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; width: 100%; box-sizing: border-box;">
-                            <span class="result-item">Total Investido: <strong id="invested-val" style="color: #fff;">R$
-                                    0,00</strong></span>
-                            <span class="result-item" style="margin-bottom: 0;">Juros ganhos: <strong id="interest-val"
-                                    style="color: #25d366;">R$ 0,00</strong></span>
-                        </div>
+                        <p style="margin: 0; opacity: 0.7; font-size: 0.9rem;">Verdadeiro Lucro Mensal:</p>
+                        <div id="real-profit" class="result-value">R$ 0,00</div>
 
-                        <p style="font-size: 0.8rem; opacity: 0.6; font-style: italic; margin-top: 15px;">Considerando
-                            taxa média de 10% a.a.</p>
+                        <p id="feedback-text" class="result-desc">
+                            Preencha os campos ao lado para descobrir se sua empresa trabalha para você ou se você é
+                            escravo dela.
+                        </p>
+
+                        <a href="#contato" class="btn-gold"
+                            style="padding: 10px 25px; font-size: 0.9rem; text-decoration: none; display: inline-block;">
+                            QUERO CORRIGIR ISSO
+                        </a>
                     </div>
                 </div>
+
+                <script>
+                    function calculateRealProfit() {
+                        const faturamento = parseFloat(document.getElementById('faturamento').value) || 0;
+                        const custos = parseFloat(document.getElementById('custos').value) || 0;
+                        const retirada = parseFloat(document.getElementById('retirada').value) || 0;
+
+                        if (faturamento === 0) return;
+
+                        const lucroOperacional = faturamento - custos;
+                        const lucroReal = lucroOperacional - retirada;
+                        const margemReal = (lucroReal / faturamento) * 100;
+
+                        const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+                        const profitEl = document.getElementById('real-profit');
+                        const badgeEl = document.getElementById('health-badge');
+                        const textEl = document.getElementById('feedback-text');
+                        const boxEl = document.getElementById('result-box');
+
+                        profitEl.innerText = formatter.format(lucroReal);
+
+                        // Lógica de Diagnóstico
+                        if (lucroReal < 0) {
+                            // Prejuízo
+                            badgeEl.className = 'health-badge badge-danger';
+                            badgeEl.innerText = '⚠️ ALERTA VERMELHO';
+                            profitEl.style.color = '#e74c3c';
+                            textEl.innerHTML = `Sua empresa <strong>não se paga</strong>. Você está financiando a operação com seu futuro ou criando dívidas ocultas.`;
+                            boxEl.style.borderColor = '#e74c3c';
+                        } else if (margemReal < 10) {
+                            // Lucro Baixo
+                            badgeEl.className = 'health-badge badge-warning';
+                            badgeEl.innerText = 'CUIDADO: MARGEM BAIXA';
+                            profitEl.style.color = '#f39c12';
+                            textEl.innerHTML = `Sua margem real é de apenas <strong>${margemReal.toFixed(1)}%</strong>. Qualquer imprevisto pode te levar ao prejuízo.`;
+                            boxEl.style.borderColor = '#f39c12';
+                        } else {
+                            // Lucro Saudável
+                            badgeEl.className = 'health-badge badge-success';
+                            badgeEl.innerText = '✅ EMPRESA SAUDÁVEL';
+                            profitEl.style.color = '#2ecc71';
+                            textEl.innerHTML = `Parabéns! Sua margem real é de <strong>${margemReal.toFixed(1)}%</strong>. Agora é hora de escalar e multiplicar esse capital.`;
+                            boxEl.style.borderColor = '#2ecc71';
+                        }
+                    }
+                </script>
             </div>
-
-            <script>
-                function calculateWealth() {
-                    let initial = parseFloat(document.getElementById('initial').value) || 0;
-                    let monthly = parseFloat(document.getElementById('monthly').value) || 0;
-                    let years = parseInt(document.getElementById('years').value) || 10;
-                    let rate = 0.10; // 10% per year
-                    let monthlyRate = rate / 12;
-                    let months = years * 12;
-
-                    let futureValue = initial * Math.pow(1 + monthlyRate, months) +
-                        (monthly * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
-
-                    let totalInvested = initial + (monthly * months);
-                    let interest = futureValue - totalInvested;
-
-                    // Format
-                    let formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-
-                    document.getElementById('total-val').innerText = formatter.format(futureValue);
-                    document.getElementById('invested-val').innerText = formatter.format(totalInvested);
-                    document.getElementById('interest-val').innerText = formatter.format(interest);
-                    document.getElementById('res-years').innerText = years;
-                }
-
-                // Init
-                window.onload = calculateWealth;
-            </script>
         </div>
     </section>
 
@@ -577,53 +612,152 @@
         </div>
     </section>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5511989996055" class="whatsapp-float" target="_blank" title="Fale comigo no WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- WIDGET IA FLUTUANTE -->
+    <div id="ai-widget" class="ai-widget">
+        <div class="ai-bubble" id="ai-bubble">
+            Psiu! 🤫 Sua empresa dá lucro de verdade?
+            <div class="ai-bubble-arrow"></div>
+            <button class="ai-close" onclick="document.getElementById('ai-bubble').style.display='none'">×</button>
+        </div>
+        <a href="https://wa.me/5511989996055?text=Olá,%20vi%20o%20site%20e%20quero%20saber%20se%20minha%20empresa%20está%20dando%20lucro%20mesmo."
+            class="ai-button" target="_blank" title="Falar com Especialista">
+            <i class="fab fa-whatsapp"></i>
+            <span class="online-dot"></span>
+        </a>
+    </div>
+
     <style>
-        .whatsapp-float {
+        .ai-widget {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: #25d366;
-            color: #FFF;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 32px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .ai-button {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid white;
-            transition: all 0.3s ease;
-            animation: pulse-green 2s infinite;
-        }
-
-        .whatsapp-float:hover {
-            background-color: #128C7E;
-            color: white;
-            transform: scale(1.1);
+            font-size: 35px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
             text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        @keyframes pulse-green {
+        .ai-button:hover {
+            transform: scale(1.1) rotate(-10deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            color: white;
+        }
+
+        .online-dot {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 15px;
+            height: 15px;
+            background: #e74c3c;
+            border-radius: 50%;
+            border: 2px solid white;
+            animation: pulse-red 2s infinite;
+        }
+
+        .ai-bubble {
+            background: white;
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 15px 15px 2px 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            margin-bottom: 15px;
+            max-width: 250px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: popIn 0.5s forwards 2s;
+            /* Aparece após 2s */
+            border: 1px solid #eee;
+        }
+
+        .ai-bubble-arrow {
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid white;
+        }
+
+        .ai-close {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: #eee;
+            color: #777;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-red {
             0% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
             }
 
             70% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+                transform: scale(1.1);
+                box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
             }
 
             100% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+            }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .ai-widget {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .ai-button {
+                width: 55px;
+                height: 55px;
+                font-size: 28px;
+            }
+
+            .ai-bubble {
+                font-size: 0.85rem;
+                padding: 12px 15px;
+                margin-bottom: 10px;
+                right: 0;
             }
         }
     </style>
