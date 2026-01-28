@@ -8,7 +8,8 @@
             <h1>{{ site_settings.hero_title|linebreaksbr }}</h1>
             <p>{{ site_settings.hero_subtitle }}</p>
             <a href="#ebooks" class="btn-gold reveal active"
-                style="transition-delay: 0.4s; color: #ffffff !important; display: inline-block; text-align: center; z-index: 10; position: relative; opacity: 1 !important;">{{ site_settings.hero_button_text|default:"SAIBA MAIS" }}</a>
+                style="transition-delay: 0.4s; color: #ffffff !important; display: inline-block; text-align: center; z-index: 10; position: relative; opacity: 1 !important;">{{
+                site_settings.hero_button_text|default:"SAIBA MAIS" }}</a>
         </div>
     </section>
 
@@ -26,25 +27,176 @@
                 <div class="sobre-texto">
                     <h3>{{ site_settings.about_title }}</h3>
                     <p>{{ site_settings.about_description|linebreaksbr }}</p>
-                    <img src="img/dilvania-profile-final.png"
-                        alt="Assinatura" style="height: 50px; opacity: 0.5; margin-top: 20px;">
+                    <img src="img/dilvania-profile-final.png" alt="Assinatura"
+                        style="height: 50px; opacity: 0.5; margin-top: 20px;">
                 </div>
             </div>
         </div>
     </section>
 
     <section id="servicos">
-        <div class="container">
+        <div class="container" style="position: relative;">
             <h2 class="reveal">Soluções <span>Exclusivas</span></h2>
-            <div class="servicos-grid">
-                {% for service in services %}
-                <div class="servico-card reveal">
-                    <i class="{{ service.icon }} servico-icon"></i>
-                    <h3>{{ service.title }}</h3>
-                    <p>{{ service.description }}</p>
+
+            <div class="carousel-container">
+                <div class="servicos-track" id="servicosTrack">
+                    {% for service in services %}
+                    <div class="servico-card reveal">
+                        <i class="{{ service.icon }} servico-icon"></i>
+                        <h3>{{ service.title }}</h3>
+                        <p>{{ service.description }}</p>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
+
+            <!-- Carousel Navigation -->
+            <button class="carousel-prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+
+            <!-- Inline Styles for Carousel -->
+            <style>
+                .carousel-container {
+                    overflow: hidden;
+                    width: 100%;
+                    padding: 20px 0;
+                }
+
+                .servicos-track {
+                    display: flex;
+                    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+                    gap: 30px;
+                }
+
+                .servico-card {
+                    flex: 0 0 calc(33.333% - 20px);
+                    min-width: 0;
+                    /* Fix flexbox min-width issue */
+                }
+
+                .carousel-prev,
+                .carousel-next {
+                    position: absolute;
+                    top: 55%;
+                    transform: translateY(-50%);
+                    background: var(--cor-fundo-secundario);
+                    border: 1px solid var(--cor-destaque);
+                    color: var(--cor-destaque);
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    z-index: 10;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: 0.3s;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                }
+
+                .carousel-prev:hover,
+                .carousel-next:hover {
+                    background: var(--cor-destaque);
+                    color: #fff;
+                }
+
+                .carousel-prev {
+                    left: -25px;
+                }
+
+                .carousel-next {
+                    right: -25px;
+                }
+
+                @media (max-width: 1024px) {
+                    .servico-card {
+                        flex: 0 0 calc(50% - 15px);
+                    }
+
+                    .carousel-prev {
+                        left: -10px;
+                    }
+
+                    .carousel-next {
+                        right: -10px;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .servico-card {
+                        flex: 0 0 100%;
+                    }
+
+                    .carousel-prev {
+                        left: 0;
+                    }
+
+                    .carousel-next {
+                        right: 0;
+                    }
+
+                    .carousel-container {
+                        padding: 10px 0;
+                    }
+                }
+            </style>
+
+            <!-- Inline JS for Carousel Logic -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const track = document.getElementById('servicosTrack');
+                    const prevBtn = document.getElementById('prevBtn');
+                    const nextBtn = document.getElementById('nextBtn');
+                    const cards = track.querySelectorAll('.servico-card');
+
+                    let currentIndex = 0;
+
+                    function updateCarousel() {
+                        const cardWidth = cards[0].offsetWidth;
+                        const gap = 30; // Matches CSS gap
+                        const shift = currentIndex * (cardWidth + gap);
+                        track.style.transform = `translateX(-${shift}px)`;
+
+                        // Disable buttons at boundaries
+                        const visibleCards = getVisibleCardsCount();
+                        prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+                        prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+
+                        const maxIndex = cards.length - visibleCards;
+                        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.3' : '1';
+                        nextBtn.style.pointerEvents = currentIndex >= maxIndex ? 'none' : 'auto';
+                    }
+
+                    function getVisibleCardsCount() {
+                        if (window.innerWidth <= 768) return 1;
+                        if (window.innerWidth <= 1024) return 2;
+                        return 3;
+                    }
+
+                    nextBtn.addEventListener('click', () => {
+                        const visibleCards = getVisibleCardsCount();
+                        if (currentIndex < cards.length - visibleCards) {
+                            currentIndex++;
+                            updateCarousel();
+                        }
+                    });
+
+                    prevBtn.addEventListener('click', () => {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            updateCarousel();
+                        }
+                    });
+
+                    window.addEventListener('resize', () => {
+                        currentIndex = 0; // Reset to avoid positioning issues on resize
+                        updateCarousel();
+                    });
+
+                    // Initial call
+                    setTimeout(updateCarousel, 300); // Small delay to ensure layout is ready
+                });
+            </script>
         </div>
     </section>
 
