@@ -269,7 +269,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2069&auto=format&fit=crop');
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6)),
+            url('{% if site_settings and site_settings.hero_background_image %}{{ site_settings.hero_background_image.url }}{% else %}https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2069&auto=format&fit=crop{% endif %}');
             background-size: cover;
             background-position: center;
             z-index: -1;

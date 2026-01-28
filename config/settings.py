@@ -146,8 +146,19 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Media Files (Uploads)
+# Media Files (Uploads)
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Google Cloud Storage (PythonJet)
+GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
+
+if GS_BUCKET_NAME:
+    DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+    STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage" # Opcional: Para estáticos também
+    GS_DEFAULT_ACL = "publicRead"
+    # Overwrite MEDIA_URL to point to the bucket
+    MEDIA_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

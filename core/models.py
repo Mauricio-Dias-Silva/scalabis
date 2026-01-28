@@ -75,6 +75,7 @@ class SiteSettings(models.Model):
     hero_title = models.CharField("Título Herói", max_length=200, default="Estratégia e Liderança\nPara Negócios Reais")
     hero_subtitle = models.TextField("Subtítulo Herói", default="Transformo empresários em líderes de alta performance através de consultoria estratégica e inteligência financeira.")
     hero_button_text = models.CharField("Texto Botão Herói", max_length=50, default="Conheça Meus Materiais")
+    hero_background_image = models.ImageField("Imagem de Fundo Herói", upload_to="site/", blank=True, null=True, help_text="Imagem de fundo da seção Hero")
     
     # About Section
     about_title = models.CharField("Título Sobre", max_length=100, default="Olá, sou Dilvania Teixeira")

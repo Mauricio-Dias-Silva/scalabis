@@ -5,7 +5,7 @@ from .models import Product, Lead, SiteSettings, Service
 class SiteSettingsAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Herói (Topo do Site)', {
-            'fields': ('hero_title', 'hero_subtitle', 'hero_button_text')
+            'fields': ('hero_title', 'hero_subtitle', 'hero_button_text', 'hero_background_image')
         }),
         ('Sobre', {
             'fields': ('about_title', 'about_description', 'about_image')
