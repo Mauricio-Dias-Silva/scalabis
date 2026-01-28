@@ -11,7 +11,13 @@ class SiteSettingsAdmin(admin.ModelAdmin):
             'fields': ('about_title', 'about_description', 'about_image')
         }),
         ('Contato', {
-            'fields': ('contact_phone', 'contact_email', 'contact_address')
+            'fields': ('contact_phone', 'contact_email', 'contact_address', 'contact_form_intro')
+        }),
+        ('Widgets & Elementos', {
+            'fields': ('whatsapp_widget_text', 'show_termometro')
+        }),
+        ('Seção de Ebooks', {
+            'fields': ('ebook_section_title', 'ebook_section_subtitle')
         }),
         ('Área de Bônus (Download)', {
             'fields': ('bonus_title', 'bonus_subtitle', 'bonus_button_text', 'bonus_spreadsheet', 'bonus_image')

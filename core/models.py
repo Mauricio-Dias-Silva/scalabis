@@ -82,9 +82,22 @@ class SiteSettings(models.Model):
     about_image = models.ImageField("Foto Sobre", upload_to="site/", blank=True, null=True, help_text="Se deixar em branco, usa a padrão.")
 
     # Contact Info
-    contact_phone = models.CharField("Telefone/WhatsApp", max_length=20, default="(11) 98267-5531")
-    contact_email = models.EmailField("Email", default="dilvania.teixeira@dsop.com.br")
-    contact_address = models.CharField("Endereço", max_length=200, default="Carapicuíba - SP")
+    contact_phone = models.CharField("Telefone/WhatsApp", max_length=20, default="(11) 98999-6055")
+    contact_email = models.EmailField("Email", default="dillteixeira31@gmail.com")
+    contact_address = models.CharField("Endereço", max_length=200, default="Santana de Parnaíba - SP")
+
+    # Whatsapp Widget
+    whatsapp_widget_text = models.CharField("Texto Widget WhatsApp", max_length=50, default="Falar comigo no WhatsApp")
+
+    # Ebook Section
+    ebook_section_title = models.CharField("Título Seção Ebooks", max_length=100, default="Educação Financeira Consciente")
+    ebook_section_subtitle = models.TextField("Subtítulo Seção Ebooks", default="Guias práticos para organizar o dinheiro com clareza, método e decisões mais alinhadas à sua realidade")
+
+    # Contact Section
+    contact_form_intro = models.TextField("Texto Intro do Formulário", default="Se fizer sentido para você, este é um espaço para dar o próximo passo com clareza. Entre em contato para agendar uma conversa ou tirar dúvidas. Preencha o formulário abaixo")
+
+    # Toggles
+    show_termometro = models.BooleanField("Exibir Termômetro da Riqueza", default=False)
 
     # Bonus Material
     bonus_title = models.CharField("Título do Bônus", max_length=200, default='O "Pulo do Gato" que Faltava na Sua Gestão')

@@ -49,6 +49,7 @@
         </div>
     </section>
 
+    {% if site_settings.show_termometro %}
     <!-- TERMÔMETRO DA RIQUEZA (LUCRO REAL VS ILUSÃO) -->
     <section id="simulador"
         style="background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%); color: #fff; padding: 60px 0;">
@@ -427,6 +428,7 @@
             </div>
         </div>
     </section>
+    {% endif %}
 
     <!-- Mobile Responsive Styles for Bonus Section -->
     <style>
@@ -537,9 +539,9 @@
     <!-- NOVA SEÇÃO DE EBOOKS -->
     <section id="ebooks">
         <div class="container">
-            <h2>Conhecimento <span>Digital</span></h2>
+            <h2>{{ site_settings.ebook_section_title|safe }}</h2>
             <p style="text-align: center; max-width: 600px; margin: 0 auto 50px; color: var(--cor-texto-secundario);">
-                Manuais práticos e guias estratégicos disponíveis para download imediato.
+                {{ site_settings.ebook_section_subtitle }}
             </p>
 
             <div class="ebook-grid">
@@ -582,7 +584,7 @@
 
     <section id="contato" style="background-color: var(--cor-fundo-secundario);">
         <div class="container">
-            <h2>Vamos <span>Conversar?</span></h2>
+            <h2>Vamos <span>Conversar</span></h2>
             <div style="text-align: center; max-width: 700px; margin: auto;">
 
                 {% if messages %}
@@ -594,7 +596,7 @@
                 {% endfor %}
                 {% endif %}
 
-                <p>Entre em contato para agendar uma reunião ou tirar dúvidas. Preencha o formulário abaixo:</p>
+                <p>{{ site_settings.contact_form_intro|linebreaksbr }}</p>
 
                 <style>
                     .contact-form-wrapper {
@@ -739,13 +741,14 @@
                 </script>
 
                 <p style="margin-top: 20px; font-size: 1.1rem; color: var(--cor-texto);">
-                    <i class="fas fa-map-marker-alt" style="color: var(--cor-destaque);"></i> Carapicuíba - SP
+                    <i class="fas fa-map-marker-alt" style="color: var(--cor-destaque);"></i> {{
+                    site_settings.contact_address }}
                     &nbsp;|&nbsp;
-                    <i class="fas fa-phone" style="color: var(--cor-destaque);"></i> (11) 98999-6055
+                    <i class="fas fa-phone" style="color: var(--cor-destaque);"></i> {{ site_settings.contact_phone }}
                 </p>
-                <a href="mailto:dilvania.teixeira@dsop.com.br"
+                <a href="mailto:{{ site_settings.contact_email }}"
                     style="display: inline-block; margin-top: 20px; font-size: 1.2rem; color: var(--cor-destaque); font-weight: 700;">
-                    dilvania.teixeira@dsop.com.br
+                    {{ site_settings.contact_email }}
                 </a>
             </div>
         </div>
@@ -754,12 +757,12 @@
     <!-- WIDGET IA FLUTUANTE -->
     <div id="ai-widget" class="ai-widget">
         <div class="ai-bubble" id="ai-bubble">
-            Psiu! 🤫 Sua empresa dá lucro de verdade?
+            {{ site_settings.whatsapp_widget_text }}
             <div class="ai-bubble-arrow"></div>
             <button class="ai-close" onclick="document.getElementById('ai-bubble').style.display='none'">×</button>
         </div>
-        <a href="https://wa.me/5511989996055?text=Olá,%20vi%20o%20site%20e%20quero%20saber%20se%20minha%20empresa%20está%20dando%20lucro%20mesmo."
-            class="ai-button" target="_blank" title="Falar com Especialista">
+        <a href="https://wa.me/5511989996055?text=Olá,%20vi%20o%20site%20e%20gostaria%20de%20conversar."
+            class="ai-button" target="_blank" title="{{ site_settings.whatsapp_widget_text }}">
             <i class="fab fa-whatsapp"></i>
             <span class="online-dot"></span>
         </a>
